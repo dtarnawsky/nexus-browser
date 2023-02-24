@@ -1,0 +1,9 @@
+<div #slider class="container" (scroll)="onSliderScroll($event)">
+  <ng-content></ng-content>
+</div>
+<div class="slide-bullets">
+  <div *ngFor="let slide of slides; index as i" (click)="changeSlide(i)"
+    [attr.aria-label]="i === currentIndex ? slide + ' slide active' : 'Select '+slide+' slide'"
+    [ngClass]="i === currentIndex ? 'slide-bullet-active' : 'slide-bullet'">
+  </div>
+</div>

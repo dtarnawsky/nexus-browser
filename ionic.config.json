@@ -1,0 +1,7 @@
+{
+  "name": "capview",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

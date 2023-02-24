@@ -1,0 +1,96 @@
+{
+  "plugins": [
+    {
+      "name": "@capacitor/app",
+      "version": "4.1.1"
+    },
+    {
+      "name": "@capacitor/browser",
+      "version": "4.1.1"
+    },
+    {
+      "name": "@capacitor/camera",
+      "version": "4.1.4"
+    },
+    {
+      "name": "@capacitor/clipboard",
+      "version": "4.1.0"
+    },
+    {
+      "name": "@capacitor/device",
+      "version": "4.1.0"
+    },
+    {
+      "name": "@capacitor/dialog",
+      "version": "4.1.0"
+    },
+    {
+      "name": "@capacitor/filesystem",
+      "version": "4.1.4"
+    },
+    {
+      "name": "@capacitor/haptics",
+      "version": "4.1.0"
+    },
+    {
+      "name": "@capacitor/keyboard",
+      "version": "4.1.1"
+    },
+    {
+      "name": "@capacitor/local-notifications",
+      "version": "4.1.5"
+    },
+    {
+      "name": "@capacitor/motion",
+      "version": "4.0.2"
+    },
+    {
+      "name": "@capacitor/network",
+      "version": "4.1.0"
+    },
+    {
+      "name": "@capacitor/preferences",
+      "version": "4.0.2"
+    },
+    {
+      "name": "@capacitor/screen-reader",
+      "version": "4.1.2"
+    },
+    {
+      "name": "@capacitor/share",
+      "version": "4.1.1"
+    },
+    {
+      "name": "@capacitor/splash-screen",
+      "version": "4.1.4"
+    },
+    {
+      "name": "@capacitor/status-bar",
+      "version": "4.1.1"
+    },
+    {
+      "name": "@capacitor/text-zoom",
+      "version": "4.1.0"
+    },
+    {
+      "name": "@capacitor/toast",
+      "version": "4.1.0"
+    },
+    {
+      "name": "@ionic-enterprise/auth",
+      "version": "3.10.3"
+    },
+    {
+      "name": "@ionic-enterprise/identity-vault",
+      "version": "5.9.6"
+    },
+    {
+      "name": "@ionic-enterprise/secure-storage",
+      "version": "3.0.0"
+    },
+    {
+      "name": "phonegap-plugin-barcodescanner",
+      "version": "9.0.0"
+    }
+  ]
+}

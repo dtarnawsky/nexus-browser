@@ -1,0 +1,40 @@
+.slide-bullets {
+  width: 100%;
+  height: 45px;  
+  padding-left: 20px;
+  text-align: center;
+}
+
+.slide-bullet-active {
+  background-color: white;
+  margin: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+}
+
+.slide-bullet {
+  background-color: white;
+  opacity: 0.5;
+  margin: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 20px;
+  scroll-behavior: smooth;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}

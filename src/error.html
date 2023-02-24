@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Ionic App</title>
+
+    <base href="/" />
+
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport"
+        content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+<style>
+    p {
+        color: white;
+    }
+
+    body {
+        background-color: #333;
+        text-align: center;
+        vertical-align: middle;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+        font-size: larger;
+    }
+
+    button {
+        color: #333;
+        background-color: white;
+        padding: 16px 50px 16px 50px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+        font-size: large;
+        text-transform: uppercase;
+    }
+
+    .vertical-center {
+        margin: 0;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+</style>
+
+<body>
+    <div class="vertical-center">
+        <p id="message">No site available</p>
+        <button onclick="window.location.href = localStorage['capViewURL'];">Exit</button>
+    </div>
+</body>
+<script>   
+    document.getElementById('message').innerText = `${localStorage['siteURL']} is not responding.`;
+ </script>
+ 
+</html>

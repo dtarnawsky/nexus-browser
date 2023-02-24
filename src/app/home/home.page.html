@@ -1,0 +1,79 @@
+<ion-content color="primary" [fullscreen]="true">
+  <div id="container">
+    <div [hidden]="!vm.busy">
+      <ion-spinner color="light" name="crescent" />
+    </div>
+
+    <picture [hidden]="vm.busy">
+      <!-- <source class="logo" srcset="assets/cap-light.svg" media="(prefers-color-scheme: dark)" /> -->
+      <img class="logo" src="assets/logo-nexus.png" />
+    </picture>
+    
+    <div [hidden]="vm.busy || vm.services.length === 0">
+      <h5>Development Servers</h5>
+      <ion-card color="light" *ngFor="let service of vm.services" (click)="go(service.address+':'+service.port)">
+        <ion-icon class="svc-icon" name="cube-outline"></ion-icon>
+        <ion-icon class="rt-icon" name="chevron-forward-outline"></ion-icon>
+        <ion-card-header class="svc">          
+          <ion-card-title class="svc">{{service.name}} on {{service.hostname}}</ion-card-title>          
+          <!-- <ion-card-subtitle>Capacitor View</ion-card-subtitle> -->
+        </ion-card-header>
+
+        <ion-card-content class="svc">
+          {{service.address}} {{service.port}}
+        </ion-card-content>
+      </ion-card>      
+    </div>
+    <div [hidden]="vm.services.length > 0">
+      <ion-card color="dark">
+        <ion-card-header>
+          <ion-card-title>Getting Started</ion-card-title>
+          <!-- <ion-card-subtitle>Capacitor View</ion-card-subtitle> -->
+        </ion-card-header>
+
+        <ion-card-content>
+          Click Run > Web in the Ionic Visual Studio Code Extension. Dev servers will appear here automatically.
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+
+    <form [hidden]="vm.busy" (submit)="connect(vm.url)">
+      <input enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
+        [(ngModel)]="vm.url" type="url" />
+      <ion-icon class="qr" name="qr-code-sharp" (click)="scan()"></ion-icon>
+    </form>
+  </div>
+
+</ion-content>
+<ion-footer class="ion-no-border">
+  <!-- <app-slides [hidden]="vm.busy || vm.hideHistory || vm.urls.length > 0 || vm.hideTutorial">
+    <app-slide>
+      <div class="card">
+        <h4>Tutorial</h4>
+        <p>Test your website or web app during development<br /><br />As you change and save code in your IDE your page
+          will reload</p>
+      </div>
+    </app-slide>
+    <app-slide>
+      <div class="card">
+        <h4>Start Dev Server</h4>
+        <p>Run your local server on your Mac or Windows machine<br /><br />(or use the Ionic VS Code extension)</p>
+      </div>
+    </app-slide>
+    <app-slide>
+      <div class="card">
+        <h4>Connect</h4>
+        <p>Enter the external IP Address and port number of your local dev server<br /><br />(or Scan the QR Code shown
+          in
+          VS Code)</p>
+        <ion-button (click)="vm.hideTutorial=true">Close</ion-button>
+      </div>
+    </app-slide>
+  </app-slides> -->
+
+  <!-- <div [hidden]="vm.busy || vm.hideHistory || vm.urls.length === 0">
+    <p class="history line" *ngFor="let url of vm.urls" (click)="go(url)">{{url}}</p>
+    <p class="history" (click)="clearHistory()">Clear History</p>
+  </div> -->
+</ion-footer>

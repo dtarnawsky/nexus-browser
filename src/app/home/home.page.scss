@@ -1,0 +1,162 @@
+#container {
+  text-align: center;
+  margin-top: 20%;
+}
+
+input {
+  font-size: large;
+  padding: 1em;
+  border: none;
+  border-radius: 2em;
+  width: 90vw;
+  max-width: 800px;
+  color: var(--ion-color-dark);
+  background-color: var(--ion-color-light);
+}
+
+i {
+  font-weight: bold;
+  font-style: normal;
+  font-family: 'Courier', monospace;
+  text-transform: uppercase;
+}
+
+ion-note {
+  font-size: small;
+}
+
+ion-card {
+  text-align: start;
+}
+
+input:focus {
+  outline: none;
+}
+
+.svc-icon {
+  font-size: 60px;
+  float: left;
+  margin-top: 0.25em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+  opacity: 0.2;
+}
+
+.rt-icon {
+  margin-top:1.8em;
+  margin-right:0.5em;
+  float: right;
+  font-size:20px;
+}
+
+ion-spinner {
+  width: 5em;
+  height: 5em;
+  position: absolute;
+  left: calc(50vw - 2.5em);
+  top: calc(50vh - 2.5em);
+}
+
+ion-card-header.svc {
+  padding-top: 1em;
+  padding-left: 0;
+  padding-bottom: 0;
+
+}
+
+ion-card-title.svc {
+  font-size: 1em;
+}
+
+ion-card-content.svc {
+  opacity: 0.5;
+}
+
+.logo {
+  width: 180px;
+  margin-bottom: 2em;
+}
+
+.qr {
+  font-size: 2em;
+  padding: 0.3em;
+  border-radius: 1em;
+  position: absolute;
+  margin-top: 0.12em;
+  margin-left: -1.75em;
+  color: var(--ion-color-dark);
+  background-color: transparent;
+}
+
+.card {
+  border-radius: 10px;
+  border: 2px solid var(--ion-color-dark);
+  padding: 2em;
+  color: var(--ion-color-light);
+  background-color: var(--ion-color-dark-med);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h4 {
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+p {
+  margin-top: 0.7em;
+}
+
+h5 {
+  margin-left: 1.5em;
+  margin-bottom: -0.8em;
+  font-size:small;
+  text-transform: uppercase;
+  text-align: start;
+}
+
+.note {
+  font-size: small;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.history {
+  color: var(--ion-color-light);
+  text-align: center;
+
+  padding-bottom: 16px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.line {
+  border-bottom: 1px solid var(--line);
+}
+
+@media screen and (max-height: 500px) {
+  app-slides {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  input {
+    border: 2px solid var(--ion-color-dark);
+  }
+
+  ion-spinner {
+    color: var(--ion-color-dark);
+  }
+
+  .history {
+    color: var(--ion-color-dark);
+  }
+
+  .card {
+    color: var(--ion-color-dark);
+    background-color: var(--ion-color-dark-med);
+  }
+}
