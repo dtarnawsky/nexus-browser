@@ -1,9 +1,9 @@
 export interface Service {
-  path: string
-  hostname: string
-  id: string
+  path?: string
+  hostname?: string
+  id?: string
   address: string
-  port: number
+  port?: number
   name: string
 }
 

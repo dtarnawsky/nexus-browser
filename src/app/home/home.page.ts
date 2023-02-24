@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Capacitor, HttpResponse } from '@capacitor/core';
 import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 import { StatusBar, Style } from '@capacitor/status-bar';
-import { AlertController, IonicModule } from '@ionic/angular';
+import { ActionSheetController, AlertController, IonicModule } from '@ionic/angular';
 import { HistoryService } from '../history.service';
 import { ScanService } from '../scan.service';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -13,19 +13,20 @@ import { delay } from '../util.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicDiscover, Service } from '../discovery';
+import { ShortcutComponent } from '../shortcut/shortcut.component';
+import { SettingsService } from '../settings.service';
 
 interface HomeModel {
   url: string;
-  urls: Array<string>;
   busy?: boolean;
   hideTutorial?: boolean;
-  hideHistory?: boolean;  
+  hideHistory?: boolean;
   services: Service[];
 }
 
 @Component({
   standalone: true,
-  imports: [SlidesComponent, SlideComponent, CommonModule, FormsModule, IonicModule],
+  imports: [SlidesComponent, ShortcutComponent, SlideComponent, CommonModule, FormsModule, IonicModule],
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
@@ -34,22 +35,21 @@ export class HomePage implements OnInit {
 
   public vm: HomeModel = {
     url: '',
-    urls: [],
     services: []
   };
-
 
   constructor(
     private alertController: AlertController,
     private historyService: HistoryService,
     private scanService: ScanService,
     private ngZone: NgZone,
+    private actionSheetCtrl: ActionSheetController,
+    private settingsService: SettingsService
   ) { }
 
   async ngOnInit() {
-    await this.loadUrls();
+    await this.load();
 
-    //this.vm.services.push({address:'192.168.1.12', port: 8100, name: 'my-app', path: '', hostname: 'Damians-MacBook-Pro.local', id: '12332'});
     if (!Capacitor.isNativePlatform()) {
       return;
     }
@@ -76,8 +76,18 @@ export class HomePage implements OnInit {
 
   async discover() {
     const data = await IonicDiscover.getServices();
-    this.vm.services = data?.services;
+    this.addServices(data?.services);
     console.log(this.vm.services);
+  }
+
+  private addServices(services: Service[]) {
+    if (!services) return;
+    for (const service of services) {
+      const idx = this.vm.services.findIndex((found) => found.id == service.id);
+      if (idx == -1) {
+        this.vm.services.push(service);
+      }
+    }
   }
 
   /**
@@ -97,6 +107,14 @@ export class HomePage implements OnInit {
     this.visit(fullUrl);
   }
 
+  public async open(e: string, service: Service) {
+    if (e == 'press') {
+      this.actions(service);
+      return;
+    }
+    const url = `${service.address}${service.port ? ':' + service.port : ''}`;
+    this.go(url);
+  }
   /**
    * Go to a url from the history list
    * @param  {string} url
@@ -108,7 +126,14 @@ export class HomePage implements OnInit {
 
 
   public async clearHistory() {
-    this.vm.urls = await this.historyService.clear();
+    this.vm.services = await this.historyService.clear();
+  }
+
+  public async settings() {
+    const action = await this.settingsService.presentSettings(this.actionSheetCtrl);
+    switch (action) {
+      case 'destructive': this.clearHistory(); break;
+    }
   }
 
   public async scan() {
@@ -142,16 +167,18 @@ export class HomePage implements OnInit {
       localStorage['capViewURL'] = window.location.href;
       localStorage['siteURL'] = url;
       await this.testUrl(url);
+      await this.load();
+      this.vm.url = '';
     } finally {
       this.vm.busy = false;
     }
   }
 
-  private async loadUrls() {
+  private async load() {
     try {
-      this.vm.urls = await this.historyService.load();
+      this.vm.services = await this.historyService.load();
     } catch {
-      this.vm.urls = [];
+      this.vm.services = [];
     }
   }
 
@@ -161,14 +188,15 @@ export class HomePage implements OnInit {
     do {
       try {
         retry = false;
-        if (url.startsWith('http://1.1.1.1')) {
-          url = 'https://conf-sample.netlify.app/index.html';
-        }
-        const response: HttpResponse = await CapacitorHttp.get({ url });
-        if (response.status == 200) {
-          window.location.href = url;
+        if (!Capacitor.isNativePlatform()) {
+          window.open(url);
         } else {
-          this.alert(`${url} responded with the status code ${response.status}`);
+          const response: HttpResponse = await CapacitorHttp.get({ url });
+          if (response.status == 200) {
+            window.location.href = url;
+          } else {
+            this.alert(`${url} responded with the status code ${response.status}`);
+          }
         }
       } catch (error) {
         console.error('er', error);
@@ -182,7 +210,7 @@ export class HomePage implements OnInit {
         } else {
           this.alert(message);
           await this.historyService.remove(url);
-          await this.loadUrls();
+          await this.load();
         }
       }
     }
@@ -201,6 +229,14 @@ export class HomePage implements OnInit {
 
     await alert.present();
     await alert.onDidDismiss();
+  }
+
+  private async actions(service: Service) {
+    const action = await this.settingsService.presentActions(this.actionSheetCtrl, service);
+    if (action == 'destructive') {
+      await this.historyService.remove(service.address);
+      await this.load();
+    }
   }
 
 }

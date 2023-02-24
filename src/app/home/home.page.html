@@ -1,49 +1,32 @@
-<ion-content color="primary" [fullscreen]="true">
+<ion-content color="dark" [fullscreen]="true">
+  <ion-fab slot="fixed" horizontal="end" vertical="start">
+    <ion-fab-button (click)="settings()">
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div id="container">
     <div [hidden]="!vm.busy">
       <ion-spinner color="light" name="crescent" />
     </div>
 
     <picture [hidden]="vm.busy">
-      <!-- <source class="logo" srcset="assets/cap-light.svg" media="(prefers-color-scheme: dark)" /> -->
-      <img class="logo" src="assets/logo-nexus.png" />
+      <img class="logo" src="assets/logo-nexus.svg" />
     </picture>
-    
-    <div [hidden]="vm.busy || vm.services.length === 0">
-      <h5>Development Servers</h5>
-      <ion-card color="light" *ngFor="let service of vm.services" (click)="go(service.address+':'+service.port)">
-        <ion-icon class="svc-icon" name="cube-outline"></ion-icon>
-        <ion-icon class="rt-icon" name="chevron-forward-outline"></ion-icon>
-        <ion-card-header class="svc">          
-          <ion-card-title class="svc">{{service.name}} on {{service.hostname}}</ion-card-title>          
-          <!-- <ion-card-subtitle>Capacitor View</ion-card-subtitle> -->
-        </ion-card-header>
-
-        <ion-card-content class="svc">
-          {{service.address}} {{service.port}}
-        </ion-card-content>
-      </ion-card>      
-    </div>
-    <div [hidden]="vm.services.length > 0">
-      <ion-card color="dark">
-        <ion-card-header>
-          <ion-card-title>Getting Started</ion-card-title>
-          <!-- <ion-card-subtitle>Capacitor View</ion-card-subtitle> -->
-        </ion-card-header>
-
-        <ion-card-content>
-          Click Run > Web in the Ionic Visual Studio Code Extension. Dev servers will appear here automatically.
-        </ion-card-content>
-      </ion-card>
-    </div>
-
 
     <form [hidden]="vm.busy" (submit)="connect(vm.url)">
       <input enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
         [(ngModel)]="vm.url" type="url" />
       <ion-icon class="qr" name="qr-code-sharp" (click)="scan()"></ion-icon>
     </form>
+
+    <div class="ion-padding"></div>
+    <div class="ion-padding"></div>
+    <div [hidden]="vm.busy || vm.services.length === 0" class="shortcut-container">
+      <app-shortcut *ngFor="let service of vm.services" (clicked)="open($event, service)" [service]="service"></app-shortcut>
+    </div>
   </div>
+
+
 
 </ion-content>
 <ion-footer class="ion-no-border">

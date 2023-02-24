@@ -1,34 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
+import { Service } from './discovery';
+
 @Injectable({
   providedIn: 'root'
 })
 export class HistoryService {
+  private key = 'shortcuts';
+  private maxShortcuts = 100;
   constructor() {
   }
 
-  public async load(): Promise<Array<string>> {
-    const { value } = await Preferences.get({ key: 'url-history' });
+  public async load(): Promise<Array<Service>> {
+    const { value } = await Preferences.get({ key: this.key });
     if (!value) return [];
-    const urls: Array<string> = JSON.parse(value);
-    return urls.map((url: string) => {
-      return this.cleanup(url);
+    const urls: Array<Service> = JSON.parse(value);
+    return urls.map((service: Service) => {
+      return this.cleanup(service);
     });
   }
 
   public async add(url: string) {
-    const cleaned = this.cleanup(url);
-    const urls: Array<string> = await this.load();
-    if (!urls.includes(cleaned)) {
-      urls.unshift(cleaned);
-      if (urls.length > 5) {
-        urls.pop();
+    const service = this.newService(url);
+    const services: Array<Service> = await this.load();
+
+    const idx = services.findIndex((found) => found.address == service.address);
+    if (idx === -1) {
+      services.unshift(service);
+      if (services.length > this.maxShortcuts) {
+        services.pop();
       }
-      this.save(urls);
+      this.save(services);
     }
   }
 
-  public async clear(): Promise<Array<string>> {
+  public async clear(): Promise<Array<Service>> {
     await this.save([]);
     return await this.load();
   }
@@ -37,25 +43,49 @@ export class HistoryService {
     if (!url) {
       return '';
     }
+    url = url.toLowerCase().trim();
     if (!url.startsWith('http')) {
       if (url.match(/^\d/)) {
         // Assume http for ip addresses
-        return 'http://' + url.toLowerCase();
+        url = 'http://' + url;
       } else {
-        return 'https://' + url.toLowerCase();
+        url = 'https://' + url;
       }
     }
-    return url.toLowerCase();
+    if (!url.includes('.')) {
+      url += '.com';
+    }
+    return url;
   }
 
   public async remove(url: string): Promise<void> {
-    const urls = await this.load();   
-    const index = urls.indexOf(this.cleanup(url));
+    const services = await this.load();
+    const look = this.newService(url);
+    const index = services.findIndex((service) => service.address == look.address);
     if (index !== -1) {
-       urls.splice(index, 1);
-       await this.save(urls);
+      services.splice(index, 1);
+      await this.save(services);
     }
   }
+
+  private newService(url: string): Service {
+    return this.cleanup({ address: url, name: this.extractName(url) });
+  }
+
+  private extractName(url: string): string {
+    try {
+      let name = url.toLowerCase().replace('http://', '').replace('https://', '');
+      name = name.charAt(0).toUpperCase() + name.slice(1);
+      if (name.endsWith('.com')) {
+        name = name.substring(0, name.length - 4);
+      }
+      return name;
+    } catch {
+      return url;
+    }
+  }
+
+
 
   public isValidUrl(url: string): boolean {
     var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
@@ -67,18 +97,20 @@ export class HistoryService {
     return !!urlPattern.test(url);
   }
 
-  private cleanup(url: string): string {
+  private cleanup(service: Service): Service {
+    let url = service.address;
     let r = url.replace('https://', '').replace('http://', '').toLowerCase();
     if (r.endsWith('/')) {
       r = r.slice(0, -1);
     }
-    return r;
+    service.address = url;
+    return service;
   }
 
-  private async save(urls: Array<string>) {
+  private async save(services: Array<Service>) {
     await Preferences.set({
-      key: 'url-history',
-      value: JSON.stringify(urls),
+      key: this.key,
+      value: JSON.stringify(services),
     });
   }
 }

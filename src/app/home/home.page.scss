@@ -3,6 +3,20 @@
   margin-top: 20%;
 }
 
+ion-fab-button {
+  --background: transparent;
+  --color: rgba(255,255,255,0.2);
+  --box-shadow: none;
+}
+
+.shortcut-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+  align-items: flex-end;
+}
+
 input {
   font-size: large;
   padding: 1em;
@@ -43,10 +57,10 @@ input:focus {
 }
 
 .rt-icon {
-  margin-top:1.8em;
-  margin-right:0.5em;
+  margin-top: 1.8em;
+  margin-right: 0.5em;
   float: right;
-  font-size:20px;
+  font-size: 20px;
 }
 
 ion-spinner {
@@ -112,7 +126,7 @@ p {
 h5 {
   margin-left: 1.5em;
   margin-bottom: -0.8em;
-  font-size:small;
+  font-size: small;
   text-transform: uppercase;
   text-align: start;
 }
