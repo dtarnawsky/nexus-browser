@@ -9,7 +9,7 @@
       <ion-spinner color="light" name="crescent" />
     </div>
 
-    <picture [hidden]="vm.busy">
+    <picture>
       <img class="logo" src="assets/logo-nexus.svg" />
     </picture>
 
@@ -21,7 +21,7 @@
 
     <div class="ion-padding"></div>
     <div class="ion-padding"></div>
-    <div [hidden]="vm.busy || vm.services.length === 0" class="shortcut-container">
+    <div *ngIf="!vm.busy" class="shortcut-container">
       <app-shortcut *ngFor="let service of vm.services" (clicked)="open($event, service)" [service]="service"></app-shortcut>
     </div>
   </div>

@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicDiscover, Service } from '../discovery';
 import { ShortcutComponent } from '../shortcut/shortcut.component';
 import { SettingsService } from '../settings.service';
+import { Browser } from '@capacitor/browser';
 
 interface HomeModel {
   url: string;
@@ -76,8 +77,7 @@ export class HomePage implements OnInit {
 
   async discover() {
     const data = await IonicDiscover.getServices();
-    this.addServices(data?.services);
-    console.log(this.vm.services);
+    this.addServices(data?.services);    
   }
 
   private addServices(services: Service[]) {
@@ -193,7 +193,11 @@ export class HomePage implements OnInit {
         } else {
           const response: HttpResponse = await CapacitorHttp.get({ url });
           if (response.status == 200) {
-            window.location.href = url;
+            if (this.isHttp(url)) {
+              window.location.href = url;
+            } else {
+              await Browser.open({ url, toolbarColor: '111111' });
+            }
           } else {
             this.alert(`${url} responded with the status code ${response.status}`);
           }
@@ -215,6 +219,10 @@ export class HomePage implements OnInit {
       }
     }
     while (retry);
+  }
+
+  private isHttp(url: string): boolean {
+    return url.startsWith('http://');
   }
 
   private focusUrl() {

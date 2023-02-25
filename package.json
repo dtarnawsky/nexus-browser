@@ -13,7 +13,7 @@
     "packages": "npm run build-packages || npm run write-packages",
     "build-packages": "npx tsc ./scripts/list-plugins.ts > /dev/null",
     "write-packages": "node ./scripts/list-plugins.js",
-    "assets": "npx capacitor-assets generate --iconBackgroundColor '#333' --iconBackgroundColorDark '#333' --splashBackgroundColor '#333' --splashBackgroundColorDark '#333'"
+    "assets": "npx capacitor-assets generate --iconBackgroundColor '#333333' --iconBackgroundColorDark '#333333' --splashBackgroundColor '#333333' --splashBackgroundColorDark '#333333'"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +25,7 @@
     "@angular/router": "^15.0.0",
     "@capacitor/android": "4.6.3",
     "@capacitor/app": "4.1.1",
+    "@capacitor/assets": "^2.0.4",
     "@capacitor/browser": "4.1.1",
     "@capacitor/camera": "4.1.4",
     "@capacitor/clipboard": "4.1.0",
@@ -63,7 +64,6 @@
     "@angular/compiler": "^15.0.0",
     "@angular/compiler-cli": "^15.0.0",
     "@angular/language-service": "^15.0.0",
-    "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "4.6.3",
     "@ionic/angular-toolkit": "7.0.0",
     "@types/jasmine": "4.3.1",
