@@ -3,9 +3,13 @@
   margin-top: 20%;
 }
 
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
 ion-fab-button {
   --background: transparent;
-  // --color: rgba(255,255,255,0.2);
+  --color: rgba(255,255,255,0.3);
   --box-shadow: none;
 }
 
