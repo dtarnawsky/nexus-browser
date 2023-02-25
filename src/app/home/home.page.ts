@@ -17,6 +17,7 @@ import { ShortcutAction, ShortcutComponent } from '../shortcut/shortcut.componen
 import { Role, SettingsService } from '../settings.service';
 import { UIService } from '../ui.service';
 import { UrlService } from '../url.service';
+import { Router } from '@angular/router';
 
 interface HomeModel {
   url: string;
@@ -41,6 +42,7 @@ export class HomePage implements OnInit {
   };
 
   constructor(
+    private router: Router,
     private alert: AlertController,
     private ui: UIService,
     private historyService: HistoryService,
@@ -134,6 +136,7 @@ export class HomePage implements OnInit {
     const action = await this.settingsService.presentSettings(this.actionSheetCtrl);
     switch (action) {
       case Role.destructive: this.clearHistory(); break;
+      case Role.privacy: this.router.navigateByUrl('/privacy'); break;
     }
   }
 

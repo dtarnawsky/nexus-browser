@@ -5,7 +5,8 @@ import { Service } from './discovery';
 export enum Role {
   destructive = 'destructive',
   cancel = 'cancel',
-  go = 'go'
+  go = 'go',
+  privacy = 'privacy'
 }
 
 @Injectable({
@@ -19,6 +20,7 @@ export class SettingsService {
     const actionSheet = await ctrl.create({
       header: 'Settings',
       buttons: [
+        { text: 'Privacy Policy', role: Role.privacy },
         {
           text: 'Clear History',
           role: Role.destructive,

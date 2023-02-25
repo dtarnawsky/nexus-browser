@@ -69,3 +69,5 @@ Thumbs.db
 
 resources/ios/**/*
 resources/android/**/*
+# Local Netlify folder
+.netlify
