@@ -4,7 +4,7 @@ export interface Service {
   id?: string
   address: string
   port?: number
-  name: string
+  name: string,
+  icon?: string // Url to an icon
 }
 
-export const IonicDiscover = (window as any).IonicDiscover;

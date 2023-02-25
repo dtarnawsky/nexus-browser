@@ -2,6 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Service } from '../discovery';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
+export enum ShortcutAction {
+  click,
+  press
+}
 
 @Component({
   standalone: true,
@@ -12,16 +18,20 @@ import { Service } from '../discovery';
 })
 export class ShortcutComponent {
 
-  @Input() service: Service = { address: 'localhost', name: 'domain'};
-  @Output() clicked = new EventEmitter<string>();
-  constructor() { }
+  @Input() service: Service = { address: 'localhost', name: 'domain' };
+  @Output() clicked = new EventEmitter<ShortcutAction>();
+  constructor(private sanitizer: DomSanitizer) { }
 
   click() {
-    this.clicked.emit('click');
+    this.clicked.emit(ShortcutAction.click);
   }
 
   press() {
-    this.clicked.emit('press');
+    this.clicked.emit(ShortcutAction.press);
+  }
+
+  safeUrl(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
 }

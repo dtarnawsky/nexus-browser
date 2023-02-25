@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
+import { AdvHttpResponse } from './cordova-plugins';
 import { Service } from './discovery';
+import { random } from './util.service';
+import { Directory, Filesystem, FilesystemDirectory } from '@capacitor/filesystem';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,34 +12,79 @@ import { Service } from './discovery';
 export class HistoryService {
   private key = 'shortcuts';
   private maxShortcuts = 100;
+  private services: Service[] = [];
   constructor() {
   }
 
-  public async load(): Promise<Array<Service>> {
+  public async load(): Promise<Service[]> {
+    if (this.services.length > 0) {
+      return this.services;
+    }
+
     const { value } = await Preferences.get({ key: this.key });
-    if (!value) return [];
-    const urls: Array<Service> = JSON.parse(value);
-    return urls.map((service: Service) => {
-      return this.cleanup(service);
-    });
+    if (!value) {
+      this.services = [];
+    } else {
+      const services: Array<Service> = JSON.parse(value);
+      this.services = services.map((service: Service) => {
+        return this.cleanup(service);
+      });
+    }
+    return this.services;
   }
 
   public async add(url: string) {
     const service = this.newService(url);
-    const services: Array<Service> = await this.load();
+    if (!this.services) throw new Error('Services Not Loaded');
 
-    const idx = services.findIndex((found) => found.address == service.address);
+    const idx = this.services.findIndex((found) => found.address == service.address);
     if (idx === -1) {
-      services.unshift(service);
-      if (services.length > this.maxShortcuts) {
-        services.pop();
+      this.services.unshift(service);
+      if (this.services.length > this.maxShortcuts) {
+        this.services.pop();
       }
-      this.save(services);
+      this.save();
     }
   }
 
+  private find(url: string): Service | undefined {
+    const service = this.newService(url);
+    if (!this.services) return undefined;
+    return this.services.find((found) => found.address == service.address);
+  }
+
+  public async setIcon(url: string, res: AdvHttpResponse) {
+    const service = this.find(url);
+    if (!this.services) throw new Error('Services Not Loaded');
+    if (!service) return;
+    if (!service.id) {
+      service.id = this.unique();
+    }
+
+    const filename = `${service.id}.jpg`;
+    const b64 = btoa(res.data);
+    const result = await Filesystem.writeFile({ data: b64, path: filename, directory: Directory.Data });    
+    const uri = await Filesystem.getUri({ directory: Directory.Data, path: filename });
+    service.icon = Capacitor.convertFileSrc(uri.uri);
+    console.log(`Wrote ${service.icon} for ${url}`);
+    this.save();
+
+  }
+
+
+  private unique(): string {
+    let id: string;
+    let found: Service | undefined;
+    do {
+      id = random(1, 999999).toString();
+      found = this.services.find((service) => service.id === id);
+    } while (found);
+    return id;
+  }
+
   public async clear(): Promise<Array<Service>> {
-    await this.save([]);
+    this.services = [];
+    await this.save();
     return await this.load();
   }
 
@@ -63,8 +112,12 @@ export class HistoryService {
     const look = this.newService(url);
     const index = services.findIndex((service) => service.address == look.address);
     if (index !== -1) {
+      if (services[index].icon) {
+        await Filesystem.deleteFile({path: services[index].icon!, directory: Directory.Data});
+        console.log(`Deleted ${services[index].icon}`);
+      }
       services.splice(index, 1);
-      await this.save(services);
+      await this.save();
     }
   }
 
@@ -84,8 +137,6 @@ export class HistoryService {
       return url;
     }
   }
-
-
 
   public isValidUrl(url: string): boolean {
     var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
@@ -107,10 +158,10 @@ export class HistoryService {
     return service;
   }
 
-  private async save(services: Array<Service>) {
+  private async save() {
     await Preferences.set({
       key: this.key,
-      value: JSON.stringify(services),
+      value: JSON.stringify(this.services),
     });
   }
 }

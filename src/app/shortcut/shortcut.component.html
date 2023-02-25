@@ -1,4 +1,7 @@
-<div class="container">
-  <ion-button (click)="click()" size="large" color="light"><ion-icon size="large" [name]="service.id ? 'cube-outline' : 'document-text-outline'"></ion-icon></ion-button>
+<div class="container animate__animated animate__fadeIn">
+  <ion-button (click)="click()" class="icon-button" size="large" color="light">
+    <ion-icon *ngIf="!service.icon" size="large" [name]="service.port ? 'logo-capacitor' : 'document-text-outline'"></ion-icon>
+    <img *ngIf="service.icon" class="icon" [src]="safeUrl(service.icon)" />
+  </ion-button>
   <ion-label (click)="press()">{{service.name}}</ion-label>
 </div>

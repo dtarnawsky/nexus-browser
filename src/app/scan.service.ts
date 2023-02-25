@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ScanPreferences } from './scan-preferences';
-import { ScanResult } from './scan-result';
+import { BarcodeScanner, ScanPreferences, ScanResult } from './cordova-plugins';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +25,7 @@ export class ScanService {
     };
 
     return new Promise((resolve,reject) => {
-      (window as any).cordova.plugins.barcodeScanner.scan(
+      BarcodeScanner.scan(
         (result: ScanResult) => { resolve(result); },
         (error: string) => { reject(error); },
         preferences);

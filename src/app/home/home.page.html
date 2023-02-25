@@ -21,7 +21,7 @@
 
     <div class="ion-padding"></div>
     <div class="ion-padding"></div>
-    <div *ngIf="!vm.busy" class="shortcut-container animate__animated animate__fadeIn">
+    <div *ngIf="!vm.busy" class="shortcut-container">
       <app-shortcut *ngFor="let service of vm.services" (clicked)="open($event, service)" [service]="service"></app-shortcut>
     </div>
   </div>
@@ -29,7 +29,7 @@
 
 
 </ion-content>
-<ion-footer class="ion-no-border">
+<!-- <ion-footer class="ion-no-border"> -->
   <!-- <app-slides [hidden]="vm.busy || vm.hideHistory || vm.urls.length > 0 || vm.hideTutorial">
     <app-slide>
       <div class="card">
@@ -59,4 +59,4 @@
     <p class="history line" *ngFor="let url of vm.urls" (click)="go(url)">{{url}}</p>
     <p class="history" (click)="clearHistory()">Clear History</p>
   </div> -->
-</ion-footer>
+<!-- </ion-footer> -->

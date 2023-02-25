@@ -48,12 +48,14 @@
     "@capacitor/text-zoom": "4.1.0",
     "@capacitor/toast": "4.1.0",
     "@ionic/angular": "7.0.0-beta.4",
+    "@ionic/remote-log": "0.0.2",
     "animate.css": "^4.1.1",
+    "cordova-plugin-advanced-http": "3.3.1",
     "cordova-plugin-discover": "github:dtarnawsky/cordova-plugin-discover",
+    "cordova-plugin-file": "7.0.0",
     "ionicons": "^6.0.3",
     "phonegap-plugin-barcodescanner": "github:dtarnawsky/phonegap-plugin-barcodescanner",
     "rxjs": "7.8.0",
-    "tslib": "^2.3.0",
     "zone.js": "0.12.0"
   },
   "devDependencies": {
@@ -84,6 +86,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "tslib": "^2.5.0",
     "typescript": "4.9.5"
   },
   "description": "Browser Mobile  Application"

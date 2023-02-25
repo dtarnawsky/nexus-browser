@@ -6,3 +6,20 @@
     padding-top: 0.2em;
     padding-bottom: 0.8em;
 }
+
+.icon {
+    width: 96px;
+}
+
+.icon-button {
+    width: 96px;
+    height: 96px;
+}
+
+ion-label {
+    text-overflow: ellipsis;
+    width: 96px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: small;
+}
