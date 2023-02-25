@@ -10,10 +10,10 @@
     </div>
 
     <picture>
-      <img class="logo" src="assets/logo-nexus.svg" />
+      <img class="logo animate__animated animate__fadeInDown" src="assets/logo-nexus.svg" />
     </picture>
 
-    <form [hidden]="vm.busy" (submit)="connect(vm.url)">
+    <form class="animate__animated animate__zoomIn" [hidden]="vm.busy" (submit)="connect(vm.url)">
       <input enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
         [(ngModel)]="vm.url" type="url" />
       <ion-icon class="qr" name="qr-code-sharp" (click)="scan()"></ion-icon>
@@ -21,7 +21,7 @@
 
     <div class="ion-padding"></div>
     <div class="ion-padding"></div>
-    <div *ngIf="!vm.busy" class="shortcut-container">
+    <div *ngIf="!vm.busy" class="shortcut-container animate__animated animate__fadeIn">
       <app-shortcut *ngFor="let service of vm.services" (clicked)="open($event, service)" [service]="service"></app-shortcut>
     </div>
   </div>

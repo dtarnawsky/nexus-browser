@@ -1,4 +1,5 @@
 import { CapacitorConfig } from '@capacitor/cli';
+import { KeyboardStyle } from '@capacitor/keyboard';
 
 const config: CapacitorConfig = {
   appId: 'ionic.capview',
@@ -17,6 +18,9 @@ const config: CapacitorConfig = {
     SplashScreen: {
       backgroundColor: '#333',
       launchAutoHide: false
+    },
+    Keyboard: {      
+      style: KeyboardStyle.Dark,      
     },
     CapacitorHttp: {
       enabled: false

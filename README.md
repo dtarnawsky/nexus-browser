@@ -10,6 +10,7 @@ Run all your standard Capacitor CLI commands to build and run on iOS and Android
 ## Plugins Used
 The following plugins are preinstalled
 <!--- Generated Plugins -->
+ - **@capacitor-community/image-to-text** - 4.0.2
  - **@capacitor/app** - 4.1.1
  - **@capacitor/browser** - 4.1.1
  - **@capacitor/camera** - 4.1.4
@@ -29,12 +30,7 @@ The following plugins are preinstalled
  - **@capacitor/status-bar** - 4.1.1
  - **@capacitor/text-zoom** - 4.1.0
  - **@capacitor/toast** - 4.1.0
- - **@ionic-enterprise/auth** - 3.10.3
- - **@ionic-enterprise/identity-vault** - 5.9.6
- - **@ionic-enterprise/secure-storage** - 3.0.0
+ - **animate.css** - 4.1.1
+ - **cordova-plugin-discover** - 1.0.4
  - **phonegap-plugin-barcodescanner** - 9.0.0
 <!--- Generated Plugins End -->
-
-
-
-
