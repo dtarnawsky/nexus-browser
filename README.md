@@ -7,6 +7,9 @@ This Capacitor application is used to view websites.
 
 Run all your standard Capacitor CLI commands to build and run on iOS and Android.
 
+## Deploy
+- `netlify deploy --prod`
+
 ## Plugins Used
 The following plugins are preinstalled
 <!--- Generated Plugins -->
