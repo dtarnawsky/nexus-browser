@@ -159,7 +159,12 @@ h5 {
 
 @media (prefers-color-scheme: dark) {
   input {
-    border: 2px solid var(--ion-color-dark);
+    border: 2px solid var(--ion-color-dark);    
+    color: var(--ion-color-light-contrast);
+  }
+
+  ::placeholder {
+    color: var(--ion-color-light-contrast);
   }
 
   ion-spinner {
@@ -174,4 +179,5 @@ h5 {
     color: var(--ion-color-dark);
     background-color: var(--ion-color-dark-med);
   }
+
 }
