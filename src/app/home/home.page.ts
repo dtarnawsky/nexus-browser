@@ -119,10 +119,10 @@ export class HomePage implements OnInit {
         break;
       }
       case ShortcutAction.click: {
+        IonicDiscover.stop();
         const url = `${service.address}${service.port ? ':' + service.port : ''}`;
         const save = !service.hostname;
-        await this.visit(this.historyService.toFullUrl(url), save);
-        IonicDiscover.stop();
+        await this.visit(this.historyService.toFullUrl(url), save);        
         break;
       }
     }
