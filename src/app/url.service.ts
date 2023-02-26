@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { Capacitor, CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
-import { AdvHttpResponse, Http } from './cordova-plugins';
+import { AdvHttpResponse, Http, InAppBrowser } from './cordova-plugins';
 import { HistoryService } from './history.service';
 import { delay } from './util.service';
 
@@ -47,11 +47,13 @@ export class UrlService {
             if (this.isHttp(url)) {
               window.location.href = url;
             } else {
-              await Browser.open({ url, toolbarColor: '111111' });
+              if (Capacitor.getPlatform() === 'ios') {
+                await Browser.open({ url, toolbarColor: '111111' });
+              } else {
+                // The Capacitor Browser freezes the app so we use cordovas browser
+                InAppBrowser.open(url, '_blank', 'location=no');
+              }
               this.getIcon(url);
-              //const ico: HttpResponse = await CapacitorHttp.get({ url: `${url}/favicon.ico` });
-              //console.log(ico);
-
             }
           } else {
             return `${url} responded with the status code ${response.status}`;

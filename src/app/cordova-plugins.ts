@@ -1,7 +1,8 @@
 // Friendly names for cordova plugins
 export const IonicDiscover = (window as any).IonicDiscover;
 export const BarcodeScanner = (window as any).cordova?.plugins?.barcodeScanner;
-export const Http = (window as any).cordova?.plugin?.http
+export const Http = (window as any).cordova?.plugin?.http;
+export const InAppBrowser = (window as any).cordova?.InAppBrowser;
 
 // Cordova advanced Http Response
 export interface AdvHttpResponse {
