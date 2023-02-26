@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { Service } from '../discovery';
 import { IonicDiscover } from '../cordova-plugins';
 import { ShortcutAction, ShortcutComponent } from '../shortcut/shortcut.component';
+import { NavigationBar } from '@hugotomazi/capacitor-navigation-bar';
 import { Role, SettingsService } from '../settings.service';
 import { UIService } from '../ui.service';
 import { UrlService } from '../url.service';
@@ -74,6 +75,7 @@ export class HomePage implements OnInit {
       });
     });
     await StatusBar.setStyle({ style: Style.Dark });
+    await NavigationBar.setColor({ color: '#333333' });
     await SplashScreen.hide();
 
     IonicDiscover.start(); // Note: we cannot await    
@@ -89,7 +91,7 @@ export class HomePage implements OnInit {
     if (!services || services.length == 0) return;
     for (const service of services) {
       const idx = this.vm.services.findIndex((found) => found.id == service.id);
-      if (idx == -1) {        
+      if (idx == -1) {
         this.vm.services.push(service);
       }
     }
@@ -108,7 +110,7 @@ export class HomePage implements OnInit {
       return;
     }
 
-    await delay(300);    
+    await delay(300);
     this.visit(fullUrl, true);
   }
 
@@ -122,7 +124,7 @@ export class HomePage implements OnInit {
         IonicDiscover.stop();
         const url = `${service.address}${service.port ? ':' + service.port : ''}`;
         const save = !service.hostname;
-        await this.visit(this.historyService.toFullUrl(url), save);        
+        await this.visit(this.historyService.toFullUrl(url), save);
         break;
       }
     }

@@ -6,6 +6,7 @@ const config: CapacitorConfig = {
   appName: 'capview',
   webDir: 'www',
   bundledWebRuntime: false,
+  backgroundColor: '#333333',
   loggingBehavior: 'none',
   server: {    
     allowNavigation: ['*'],
@@ -13,11 +14,12 @@ const config: CapacitorConfig = {
     errorPath: 'error.html'
   },
   android: {
-    allowMixedContent: true
+    allowMixedContent: true,
+    backgroundColor: '#333333'
   },
   plugins: {
     SplashScreen: {
-      backgroundColor: '#333',
+      backgroundColor: '#333333',
       launchAutoHide: false
     },
     Keyboard: {      

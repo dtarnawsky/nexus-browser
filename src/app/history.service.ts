@@ -61,9 +61,15 @@ export class HistoryService {
       service.id = this.unique();
     }
 
-    const filename = `${service.id}.jpg`;
-    const b64 = btoa(res.data);
-    const result = await Filesystem.writeFile({ data: b64, path: filename, directory: Directory.Data });    
+    let type = '.jpg';
+    switch (res.headers['content-type']) {
+      case 'image/png': type = '.png'; break;
+      case 'image/x-icon': type = '.ico'; break;
+      default: console.warn(`Unknown content-type ${res.headers['content-type']}`);
+    }
+    const filename = `${service.id}${type}`;
+    const b64 = btoa(res.data);    
+    const result = await Filesystem.writeFile({ data: b64, path: filename, directory: Directory.Data });
     const uri = await Filesystem.getUri({ directory: Directory.Data, path: filename });
     service.icon = Capacitor.convertFileSrc(uri.uri);
     console.log(`Wrote ${service.icon} for ${url}`);
@@ -113,7 +119,7 @@ export class HistoryService {
     const index = services.findIndex((service) => service.address == look.address);
     if (index !== -1) {
       if (services[index].icon) {
-        await Filesystem.deleteFile({path: services[index].icon!, directory: Directory.Data});
+        await Filesystem.deleteFile({ path: services[index].icon!, directory: Directory.Data });
         console.log(`Deleted ${services[index].icon}`);
       }
       services.splice(index, 1);
