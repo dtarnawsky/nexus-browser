@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
-import { AdvHttpResponse } from './cordova-plugins';
+import { Http } from './cordova-plugins';
 import { Service } from './discovery';
 import { random } from './util.service';
-import { Directory, Filesystem, FilesystemDirectory } from '@capacitor/filesystem';
+import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 
 @Injectable({
@@ -53,7 +53,7 @@ export class HistoryService {
     return this.services.find((found) => found.address == service.address);
   }
 
-  public async setIcon(url: string, res: AdvHttpResponse) {
+  public async setIcon(url: string) {
     const service = this.find(url);
     if (!this.services) throw new Error('Services Not Loaded');
     if (!service) return;
@@ -61,18 +61,19 @@ export class HistoryService {
       service.id = this.unique();
     }
 
-    let type = '.jpg';
-    switch (res.headers['content-type']) {
-      case 'image/png': type = '.png'; break;
-      case 'image/x-icon': type = '.ico'; break;
-      default: console.warn(`Unknown content-type ${res.headers['content-type']}`);
-    }
-    const filename = `${service.id}${type}`;
-    const b64 = btoa(res.data);    
-    const tmp = await Filesystem.writeFile({ data: b64, path: filename, directory: Directory.Data });
-    service.icon = Capacitor.convertFileSrc(tmp.uri);
-    console.log(`Wrote ${service.icon} for ${url} (${b64.length} bytes)`);
-    this.save();
+    Http.setDataSerializer('raw');
+    const pth: string = (await Filesystem.getUri({ path: `${service.id}.jpg`, directory: Directory.Data })).uri;
+    Http.downloadFile(`${url}/favicon.ico`, {}, {},
+      pth,
+      (entry: any) => {
+        service.icon = Capacitor.convertFileSrc(entry.nativeURL);
+        console.log(`Wrote ${service.icon} for ${url}`);
+        this.save();
+      },
+      (err: any) => {
+        console.error(err);
+      }
+    );
   }
 
 

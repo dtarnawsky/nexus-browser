@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { Capacitor, CapacitorHttp, HttpResponse } from '@capacitor/core';
 import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
-import { AdvHttpResponse, Http, InAppBrowser } from './cordova-plugins';
+import { InAppBrowser } from './cordova-plugins';
 import { HistoryService } from './history.service';
 import { delay } from './util.service';
 
@@ -79,16 +79,7 @@ export class UrlService {
   }
 
   private getIcon(url: string) {
-    Http.setDataSerializer('raw');
-    Http.sendRequest(`${url}/favicon.ico`, { method: 'get' }, (response: AdvHttpResponse) => {
-      if (response.status == 200) {
-        this.historyService.setIcon(url, response);
-      } else {
-        console.error(`Failed to get icon for ${url}`);
-      }
-    },
-      (error: any) => { console.error(`${error.status}: ${error.error}`) }
-    );
+    this.historyService.setIcon(url);
   }
 
   private isHttp(url: string): boolean {
