@@ -69,9 +69,8 @@ export class HistoryService {
     }
     const filename = `${service.id}${type}`;
     const b64 = btoa(res.data);    
-    const result = await Filesystem.writeFile({ data: b64, path: filename, directory: Directory.Data });
-    const uri = await Filesystem.getUri({ directory: Directory.Data, path: filename });
-    service.icon = Capacitor.convertFileSrc(uri.uri);
+    const tmp = await Filesystem.writeFile({ data: b64, path: filename, directory: Directory.Data });
+    service.icon = Capacitor.convertFileSrc(tmp.uri);
     console.log(`Wrote ${service.icon} for ${url}`);
     this.save();
 
