@@ -14,7 +14,6 @@ import { FormsModule } from '@angular/forms';
 import { Service } from '../discovery';
 import { IonicDiscover } from '../cordova-plugins';
 import { ShortcutAction, ShortcutComponent } from '../shortcut/shortcut.component';
-import { NavigationBar } from '@hugotomazi/capacitor-navigation-bar';
 import { Role, SettingsService } from '../settings.service';
 import { UIService } from '../ui.service';
 import { UrlService } from '../url.service';
@@ -74,8 +73,10 @@ export class HomePage implements OnInit {
         this.vm.hideHistory = false;
       });
     });
+    if (Capacitor.getPlatform() === 'android') {
+      await StatusBar.setBackgroundColor({ color: '#333333' });
+    }
     await StatusBar.setStyle({ style: Style.Dark });
-    await NavigationBar.setColor({ color: '#333333' });
     await SplashScreen.hide();
 
     IonicDiscover.start(); // Note: we cannot await    
