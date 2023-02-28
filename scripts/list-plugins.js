@@ -86,6 +86,8 @@ function list() {
                             plugin = false;
                         if (pkg.startsWith('__'))
                             plugin = false;
+                        if (pkg.startsWith('angularx-qrcode'))
+                            plugin = false;
                         if ([
                             'zone.js', 'typescript', 'tslib', 'rxjs', 'ionicons', '@capacitor/cli',
                             '@capacitor/assets', '@capacitor/android', '@capacitor/ios', '@capacitor/core'

@@ -66,7 +66,7 @@
     },
     {
       "name": "@capacitor/splash-screen",
-      "version": "4.1.4"
+      "version": "4.2.0"
     },
     {
       "name": "@capacitor/status-bar",
@@ -85,8 +85,20 @@
       "version": "4.1.1"
     },
     {
+      "name": "cordova-plugin-advanced-http",
+      "version": "3.3.1"
+    },
+    {
       "name": "cordova-plugin-discover",
       "version": "1.0.4"
+    },
+    {
+      "name": "cordova-plugin-file",
+      "version": "7.0.0"
+    },
+    {
+      "name": "cordova-plugin-inappbrowser",
+      "version": "5.0.0"
     },
     {
       "name": "phonegap-plugin-barcodescanner",

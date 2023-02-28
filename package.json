@@ -10,6 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "deploy": "npm run build && netlify deploy --prod",
     "packages": "npm run build-packages || npm run write-packages",
     "build-packages": "npx tsc ./scripts/list-plugins.ts > /dev/null",
     "write-packages": "node ./scripts/list-plugins.js",
