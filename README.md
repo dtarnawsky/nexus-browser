@@ -37,3 +37,11 @@ The following plugins are preinstalled
  - **cordova-plugin-discover** - 1.0.4
  - **phonegap-plugin-barcodescanner** - 9.0.0
 <!--- Generated Plugins End -->
+
+## App Store
+
+Available in the [App Store](https://apps.apple.com/us/app/nexus-web-browser/id6445866986).
+
+## Play Store
+
+Available in the [Play Store](https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus).

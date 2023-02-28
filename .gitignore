@@ -71,3 +71,5 @@ resources/ios/**/*
 resources/android/**/*
 # Local Netlify folder
 .netlify
+
+/keys

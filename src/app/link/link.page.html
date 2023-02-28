@@ -1,0 +1,16 @@
+<ion-content color="dark">
+  <div class="content">
+    <p *ngIf="opening">Opening the app...</p>
+    <div *ngIf="!opening" class="panel-container">
+      <div class="panel">
+        <qrcode [qrdata]="appStoreUrl" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <p><ion-icon name="logo-apple-appstore"></ion-icon>&nbsp;App Store</p>
+      </div>
+      <div class="panel">
+        <qrcode [qrdata]="playStoreUrl" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <p><ion-icon name="logo-google-playstore"></ion-icon>&nbsp;Play Store</p>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
