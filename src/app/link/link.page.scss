@@ -9,15 +9,14 @@
 .panel-container {
     display: flex;
     flex-direction: row;
-    
 }
 
 .panel {
     padding: 30px;
-    display: flex;   
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
 p {
@@ -30,4 +29,10 @@ ion-icon {
     margin-top: -5px;
     position: absolute;
     margin-left: -40px;
+}
+
+qrcode {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
 }

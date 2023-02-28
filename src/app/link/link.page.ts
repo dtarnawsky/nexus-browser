@@ -9,19 +9,27 @@ import { Capacitor } from '@capacitor/core';
 export class LinkPage implements OnInit {
 
   opening: boolean = true;
+  web: boolean = false;
   appStoreUrl = 'https://apps.apple.com/us/app/nexus-web-browser/id6445866986';
   playStoreUrl = 'https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus';
 
   constructor() { }
 
   ngOnInit() {
+    document.location.href = 'io.ionic.capview://launch';
     const timer = setTimeout(() => {
       this.launchStore();
     }, 3000);
-    document.location.href = 'io.ionic.capview://launch';
+
+    this.web = !this.isAndroid() && !this.isIOS() && (Capacitor.getPlatform() == 'web');
+
   }
 
   private launchStore() {
+    if (document.hidden) {
+      console.log('dont launch store');
+      return;
+    }
     switch (Capacitor.getPlatform()) {
       case 'ios': this.openAppStore(); break;
       case 'android': this.openPlayStore(); break;
@@ -30,11 +38,11 @@ export class LinkPage implements OnInit {
     }
   }
 
-  private openAppStore() {
+  public openAppStore() {
     this.open(this.appStoreUrl);
   }
 
-  private openPlayStore() {
+  public openPlayStore() {
     this.open(this.playStoreUrl);
   }
 
@@ -45,9 +53,10 @@ export class LinkPage implements OnInit {
 
   private open(url: string) {
     document.location.href = url;
+    this.opening = false;
   }
 
-  private isIOS() {
+  public isIOS() {
     return [
       'iPad Simulator',
       'iPhone Simulator',
@@ -60,7 +69,7 @@ export class LinkPage implements OnInit {
       || (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
   }
 
-  private isAndroid() {
+  public isAndroid() {
     const ua = navigator.userAgent.toLowerCase();
     return ua.indexOf("android") > -1;
   }
