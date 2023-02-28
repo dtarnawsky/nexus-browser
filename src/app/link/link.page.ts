@@ -17,11 +17,12 @@ export class LinkPage implements OnInit {
 
   ngOnInit() {
     document.location.href = 'io.ionic.capview://launch';
+    this.web = !this.isAndroid() && !this.isIOS() && (Capacitor.getPlatform() == 'web');
+    let waitTime = this.web ? 5 : 5000;
     const timer = setTimeout(() => {
       this.launchStore();
-    }, 3000);
+    }, waitTime);
 
-    this.web = !this.isAndroid() && !this.isIOS() && (Capacitor.getPlatform() == 'web');
 
   }
 
