@@ -47,3 +47,12 @@ Available in the [App Store](https://apps.apple.com/us/app/nexus-web-browser/id6
 ## Play Store
 
 Available in the [Play Store](https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus).
+
+
+
+
+
+
+
+
+

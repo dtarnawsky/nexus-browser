@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: window.location.host.startsWith('capacitor.') ? 'capacitor' : 'home',
     pathMatch: 'full'
   },
   {
