@@ -3,7 +3,6 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    padding-bottom: 75px;
 }
 
 .rows {
@@ -20,7 +19,10 @@
     color: var(--ion-text-color);
     text-decoration: none;
     font-weight: bold;
+}
 
+.link:hover {    
+    border-bottom: 1px solid var(--ion-color-light);
 }
 
 .panel-container {
@@ -42,7 +44,8 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    max-width: 450px;    
+    max-width: 550px;
+    align-items: flex-end;
 }
 
 .panel {
@@ -56,14 +59,21 @@
 p.store {
     font-size: x-large;
     margin-left: 40px;
+    cursor: pointer;
 }
 
 p.text {
     font-size: medium;
-    margin:5px;
+    margin: 5px;
     padding: 0;
     line-height: 1.6;
     opacity: 0.5;
+}
+
+@media only screen and (min-width: 600px) {
+    p.text {
+        font-size: x-large;
+    }
 }
 
 ion-icon {
@@ -73,14 +83,34 @@ ion-icon {
     margin-left: -40px;
 }
 
+i {
+    font-style: normal;
+    font-family: 'Courier', monospace;
+    color: var(--ion-text-color);   
+  }
+
 qrcode {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
 }
 
+.line {
+    border-top: 1px solid var(--ion-color-light);
+    opacity: 0.2;
+}
+
 .capacitor-logo {
-    padding-bottom: 25px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.pad-top {
+    margin-top: 25px;
+}
+
+.pad-bottom {
+    margin-bottom: 25px;
 }
 
 @media (prefers-color-scheme: dark) {

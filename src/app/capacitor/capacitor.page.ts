@@ -9,7 +9,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class CapacitorPage implements OnInit {
 
-  opening: boolean = true;
+  opening: boolean = false;
   web: boolean = false;
   plugins: Plugin[] = [];
   appStoreUrl = 'https://apps.apple.com/us/app/nexus-web-browser/id6445866986';
@@ -18,19 +18,19 @@ export class CapacitorPage implements OnInit {
   constructor() { }
 
   async ngOnInit() {
-    document.location.href = 'io.ionic.capview://launch';
+    //document.location.href = 'io.ionic.capview://launch';
     this.web = !this.isAndroid() && !this.isIOS() && (Capacitor.getPlatform() == 'web');
     let waitTime = this.web ? 5 : 5000;
-    const timer = setTimeout(() => {
-      this.launchStore();
-    }, waitTime);
+    // const timer = setTimeout(() => {
+    //   this.launchStore();
+    // }, waitTime);
 
     const res = await fetch('assets/app-data.json');
     const data = await res.json();
     this.plugins = data.plugins;
   }
 
-  private launchStore() {
+  public launchStore() {
     if (document.hidden) {
       console.log('dont launch store');
       return;
