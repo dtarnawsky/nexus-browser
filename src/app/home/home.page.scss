@@ -73,6 +73,7 @@ ion-spinner {
   position: absolute;
   left: calc(50vw - 2.5em);
   top: calc(50vh - 2.5em);
+  
 }
 
 ion-card-header.svc {
@@ -90,7 +91,9 @@ ion-card-content.svc {
   opacity: 0.5;
 }
 
-
+ion-spinner {
+  color: var(--ion-color-light);
+}
 
 .qr {
   font-size: 2em;
@@ -178,6 +181,10 @@ h5 {
   .card {
     color: var(--ion-color-dark);
     background-color: var(--ion-color-dark-med);
+  }
+
+  ion-spinner {
+    color: var(--ion-color-light-contrast);
   }
 
 }
