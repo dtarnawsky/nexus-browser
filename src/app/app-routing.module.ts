@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./privacy/privacy.module').then( m => m.PrivacyPageModule)
   },
   {
-    path: 'link',
+    path: 'capacitor',
     loadChildren: () => import('./link/link.module').then( m => m.LinkPageModule)
   }
 ];

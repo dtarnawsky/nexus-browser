@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-link',
@@ -10,12 +11,13 @@ export class LinkPage implements OnInit {
 
   opening: boolean = true;
   web: boolean = false;
+  plugins: Plugin[] = [];
   appStoreUrl = 'https://apps.apple.com/us/app/nexus-web-browser/id6445866986';
   playStoreUrl = 'https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus';
 
   constructor() { }
 
-  ngOnInit() {
+  async ngOnInit() {
     document.location.href = 'io.ionic.capview://launch';
     this.web = !this.isAndroid() && !this.isIOS() && (Capacitor.getPlatform() == 'web');
     let waitTime = this.web ? 5 : 5000;
@@ -23,7 +25,9 @@ export class LinkPage implements OnInit {
       this.launchStore();
     }, waitTime);
 
-
+    const res = await fetch('assets/app-data.json');
+    const data = await res.json();
+    this.plugins = data.plugins;
   }
 
   private launchStore() {
@@ -45,6 +49,13 @@ export class LinkPage implements OnInit {
 
   public openPlayStore() {
     this.open(this.playStoreUrl);
+  }
+
+  public url(name: string) {
+    if (name.startsWith('@capacitor/')) {
+      return `https://capacitorjs.com/docs/apis/${name.replace('@capacitor/','')}`;
+    }
+    return `https://www.npmjs.com/package/${name}`;
   }
 
   private showLinks() {
@@ -74,4 +85,9 @@ export class LinkPage implements OnInit {
     const ua = navigator.userAgent.toLowerCase();
     return ua.indexOf("android") > -1;
   }
+}
+
+interface Plugin {
+  name: string;
+  version: string;
 }

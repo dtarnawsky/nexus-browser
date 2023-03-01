@@ -1,16 +1,44 @@
 <ion-content color="dark">
   <div class="content">
     <p *ngIf="opening">Opening the app...</p>
-    <div *ngIf="!opening" class="panel-container">
-      <div *ngIf="!isAndroid()" class="panel">
-        <qrcode elementType="svg" [margin]="0" *ngIf="web" [qrdata]="appStoreUrl" [width]="160" [errorCorrectionLevel]="'M'"></qrcode>
-        <p (click)="openAppStore()"><ion-icon name="logo-apple-appstore"></ion-icon>&nbsp;App Store</p>
-      </div>
-      <div *ngIf="!isIOS()" class="panel">
-        <qrcode elementType="svg" [margin]="0" *ngIf="web" [qrdata]="playStoreUrl" [width]="160" [errorCorrectionLevel]="'M'"></qrcode>
-        <p (click)="openPlayStore()"><ion-icon name="logo-google-playstore"></ion-icon>&nbsp;Play Store</p>
+    <div class="rows">
+      <div *ngIf="!opening" class="panel-container">
+        <div *ngIf="!isAndroid()" class="panel">
+          <qrcode elementType="svg" [margin]="0" *ngIf="web" [qrdata]="appStoreUrl" [width]="160"
+            [errorCorrectionLevel]="'M'"></qrcode>
+          <p (click)="openAppStore()"><ion-icon name="logo-apple-appstore"></ion-icon>&nbsp;App Store</p>
+        </div>
+        <div *ngIf="!isIOS()" class="panel">
+          <qrcode elementType="svg" [margin]="0" *ngIf="web" [qrdata]="playStoreUrl" [width]="160"
+            [errorCorrectionLevel]="'M'"></qrcode>
+          <p (click)="openPlayStore()"><ion-icon name="logo-google-playstore"></ion-icon>&nbsp;Play Store</p>
+        </div>
       </div>
 
+
     </div>
+  </div>
+  <div *ngIf="!opening" class="rows animate__animated animate__fadeIn">
+    <picture *ngIf="!opening">
+      <img class="logo" src="assets/logo-nexus.svg" />
+    </picture>
+    <div class="plugin">
+      <p class="text">The <b>Nexus Web Browser</b> can detect and
+        display Capacitor apps that are running on the same WIFI network.        
+        <br /><br />
+        File issues and plugin suggestions <a class="link" href="https://github.com/ionic-team/vscode-extension/issues">here</a>.
+      </p>
+    </div>
+    <div class="plugin">
+      <h3>Supported Plugins</h3>
+    </div>
+    <div class="plugin" *ngFor="let plugin of plugins">
+      <a class="link" [href]="url(plugin.name)" target="_blank">
+        <p class="text link">{{plugin.name}}</p>
+      </a>
+
+      <p class="text">{{plugin.version}}</p>
+    </div>
+
   </div>
 </ion-content>

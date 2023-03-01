@@ -33,7 +33,6 @@ The following plugins are preinstalled
  - **@capacitor/status-bar** - 4.1.1
  - **@capacitor/text-zoom** - 4.1.0
  - **@capacitor/toast** - 4.1.0
- - **animate.css** - 4.1.1
  - **cordova-plugin-advanced-http** - 3.3.1
  - **cordova-plugin-discover** - 1.0.4
  - **cordova-plugin-file** - 7.0.0
@@ -48,4 +47,7 @@ Available in the [App Store](https://apps.apple.com/us/app/nexus-web-browser/id6
 ## Play Store
 
 Available in the [Play Store](https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus).
+
+
+
 

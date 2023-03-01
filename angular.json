@@ -26,6 +26,11 @@
                 "output": "assets"
               },           
               {
+                "glob": "app-data.json",
+                "input": "assets",
+                "output": "assets"
+              },               
+              {
                 "glob": "error.html",
                 "input": "src",
                 "output": "."

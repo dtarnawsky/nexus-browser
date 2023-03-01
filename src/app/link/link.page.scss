@@ -1,14 +1,37 @@
 .content {
     display: flex;
     width: 100%;
-    height: 100%;
     align-items: center;
     justify-content: center;
+    padding-bottom: 100px;
+}
+
+.rows {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;    
+}
+
+.link {
+    cursor: pointer;
+    color: var(--ion-text-color);
+    text-decoration: none;
+    font-weight: bold;
+
 }
 
 .panel-container {
     display: flex;
     flex-direction: row;
+}
+
+.plugin {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 450px;    
 }
 
 .panel {
@@ -22,6 +45,14 @@
 p {
     font-size: x-large;
     margin-left: 40px;
+}
+
+p.text {
+    font-size: medium;
+    margin:5px;
+    padding: 0;
+    line-height: 1.6;
+    opacity: 0.5;
 }
 
 ion-icon {
