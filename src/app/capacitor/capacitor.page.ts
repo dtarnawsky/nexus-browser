@@ -4,10 +4,10 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-link',
-  templateUrl: './link.page.html',
-  styleUrls: ['./link.page.scss'],
+  templateUrl: './capacitor.page.html',
+  styleUrls: ['./capacitor.page.scss'],
 })
-export class LinkPage implements OnInit {
+export class CapacitorPage implements OnInit {
 
   opening: boolean = true;
   web: boolean = false;

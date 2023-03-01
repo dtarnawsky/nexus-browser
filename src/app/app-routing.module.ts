@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'capacitor',
-    loadChildren: () => import('./link/link.module').then( m => m.LinkPageModule)
+    loadChildren: () => import('./capacitor/capacitor.module').then( m => m.CapacitorPageModule)
   }
 ];
 

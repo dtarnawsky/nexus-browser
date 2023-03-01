@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LinkPageRoutingModule } from './link-routing.module';
+import { CapacitorPageRoutingModule } from './capacitor-routing.module';
 import { QRCodeModule } from 'angularx-qrcode';
-import { LinkPage } from './link.page';
+import { CapacitorPage } from './capacitor.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LinkPageRoutingModule,
+    CapacitorPageRoutingModule,
     QRCodeModule
   ],
-  declarations: [LinkPage]
+  declarations: [CapacitorPage]
 })
-export class LinkPageModule {}
+export class CapacitorPageModule {}
