@@ -3,14 +3,16 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    padding-bottom: 100px;
+    padding-bottom: 75px;
 }
 
 .rows {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;    
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .link {
@@ -24,6 +26,15 @@
 .panel-container {
     display: flex;
     flex-direction: row;
+}
+
+.bubble {
+    background-color: var(--ion-color-light);
+    color: var(--ion-color-dark);
+    border: 10px solid var(--ion-color-light);
+    border-radius: 50px;
+    position: absolute;
+    margin-top: 100px;
 }
 
 .plugin {
@@ -42,7 +53,7 @@
     align-items: center;
 }
 
-p {
+p.store {
     font-size: x-large;
     margin-left: 40px;
 }
@@ -70,4 +81,10 @@ qrcode {
 
 .capacitor-logo {
     padding-bottom: 25px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .bubble {
+        color: var(--ion-text-color);
+    }
 }
