@@ -44,7 +44,7 @@ export class UrlService {
         } else {
           const response: HttpResponse = await CapacitorHttp.get({ url });
           if (response.status == 200) {
-            if (this.isHttp(url)) {
+            if (this.isHttp(url) || this.allowed(url)) {
               window.location.href = url;
             } else {
               if (Capacitor.getPlatform() === 'ios') {
@@ -76,6 +76,12 @@ export class UrlService {
     }
     while (retry);
     return;
+  }
+
+  // Return if this site can be viewed in the app (true)
+  // or will launch a browser window
+  private allowed(url: string): boolean {
+    return url?.includes('.appflowapp.com');
   }
 
   private getIcon(url: string) {
