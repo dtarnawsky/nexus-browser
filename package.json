@@ -50,6 +50,7 @@
     "@capacitor/toast": "4.1.0",
     "@ionic/angular": "7.0.0-beta.4",
     "@ionic/remote-log": "0.0.2",
+    "@sentry/capacitor": "0.11.2",
     "angularx-qrcode": "^15.0.1",
     "animate.css": "^4.1.1",
     "cordova-plugin-advanced-http": "3.3.1",

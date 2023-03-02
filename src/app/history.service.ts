@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { Http } from './cordova-plugins';
 import { Service } from './discovery';
-import { random } from './util.service';
+import { getStringFrom, random } from './util.service';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 
@@ -60,20 +60,116 @@ export class HistoryService {
     if (!service.id) {
       service.id = this.unique();
     }
-
-    Http.setDataSerializer('raw');
-    const pth: string = (await Filesystem.getUri({ path: `${service.id}.jpg`, directory: Directory.Data })).uri;
-    Http.downloadFile(`${url}/favicon.ico`, {}, {},
-      pth,
-      (entry: any) => {
-        service.icon = Capacitor.convertFileSrc(entry.nativeURL);
-        console.log(`Wrote ${service.icon} for ${url}`);
-        this.save();
-      },
-      (err: any) => {
-        console.error(err);
+    let finalURL = undefined;
+    try {
+      finalURL = await this.setPWAIcon(url, service);
+    } catch {
+      try {
+        finalURL = await this.setFavIcon(url, service);
+      } catch {
+        finalURL = undefined;
       }
-    );
+    }
+    if (finalURL) {
+      service.icon = Capacitor.convertFileSrc(finalURL);
+      console.log(`Wrote ${service.icon} for ${url}`);
+      this.save();
+    }
+  }
+
+  private async setFavIcon(url: string, service: Service): Promise<string> {
+    return new Promise(async (resolve, reject) => {
+      Http.setDataSerializer('raw');
+      const pth: string = (await Filesystem.getUri({ path: `${service.id}.jpg`, directory: Directory.Data })).uri;
+      Http.downloadFile(`${url}/favicon.ico`, {}, {},
+        pth,
+        (entry: any) => {
+          resolve(entry.nativeURL);
+        },
+        (err: any) => {
+          console.error(err);
+          reject(err);
+        }
+      );
+
+    });
+  }
+
+  private async setPWAIcon(url: string, service: Service): Promise<string> {
+    return new Promise((resolve, reject) => {
+      Http.setDataSerializer('raw');
+      Http.get(url, {}, {}, async (response: any) => {
+        const appleIconUrl = this.findInHTML(response.data);
+        if (!appleIconUrl) {
+          return;
+        }
+        const fullUrl = this.joinUrl(url, appleIconUrl);
+        console.log('Download', fullUrl);
+
+        let ext = '.jpg';
+        if (fullUrl.toLowerCase().endsWith('.png')) ext = '.png';
+        const pth: string = (await Filesystem.getUri({ path: `${service.id}${ext}`, directory: Directory.Data })).uri;
+        Http.downloadFile(fullUrl, {}, {},
+          pth,
+          (entry: any) => {            
+            resolve(entry.nativeURL);
+          },
+          (err: any) => {
+            console.error(err);
+            reject(err);
+          }
+        );
+      },
+        (err: any) => {
+          console.error(err);
+          reject(err);
+        }
+      );
+    });
+  }
+
+  // Join url together. Examples:
+  // 'a/', 'b' => 'a/b'
+  // 'a/', '/b' => 'a/b'
+  // 'a',  '/b' => 'a/b'
+  // 'a',  'b' => 'a/b'
+  // 'a', 'http...b' => 'b'
+  private joinUrl(url1: string, url2: string): string {
+    if (url2.startsWith('http')) {
+      return url2;
+    }
+    if (url1.endsWith('/')) {
+      if (url2.startsWith('/')) {
+        return url1 + url2.replace('/', '');
+      } else {
+        return url1 + url2;
+      }
+    } else {
+      if (url2.startsWith('/')) {
+        return url1 + url2;
+      } else {
+        return `${url1}/${url2}`;
+      }
+    }
+  }
+
+  private findInHTML(html: string): string | undefined {
+    try {
+      const data = getStringFrom(html, `<link rel="apple-touch-icon"`, `>`);
+      if (data) {
+        
+        const href = getStringFrom(data, `href="`, `"`);
+        if (!href) {
+          console.log(`Icon not found in ${data}`);
+        }
+        console.log('apple-touch-icon url', href);
+        return href;
+      }
+    } catch (err) {
+      console.warn(`Failed to parse html`, err);
+
+    }
+    return undefined;
   }
 
 
