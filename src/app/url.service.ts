@@ -42,10 +42,11 @@ export class UrlService {
         if (!Capacitor.isNativePlatform()) {
           window.open(url);
         } else {
-          const response: HttpResponse = await CapacitorHttp.get({ url });
-          if (response.status == 200) {
-            if (this.isHttp(url) || this.allowed(url)) {
-              window.location.href = url;
+          const launchInternal = this.isHttp(url) || this.allowed(url);
+          if (!launchInternal) {
+            const response: HttpResponse = await CapacitorHttp.get({ url });
+            if (response.status !== 200) {
+              return `${url} responded with the status code ${response.status}`;
             } else {
               if (Capacitor.getPlatform() === 'ios') {
                 await Browser.open({ url, toolbarColor: '111111' });
@@ -56,11 +57,11 @@ export class UrlService {
               this.getIcon(url);
             }
           } else {
-            return `${url} responded with the status code ${response.status}`;
+            window.location.href = url;
           }
         }
       } catch (error) {
-        console.error('er', error);
+        console.error(`Unable to verify ${url}`, error);
         const message = (error as any).message;
 
         if ((message == 'The Internet connection appears to be offline.') && !hasRetried) {

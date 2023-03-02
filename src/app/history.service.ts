@@ -81,6 +81,7 @@ export class HistoryService {
     return new Promise(async (resolve, reject) => {
       Http.setDataSerializer('raw');
       const pth: string = (await Filesystem.getUri({ path: `${service.id}.jpg`, directory: Directory.Data })).uri;
+      console.log(`fav.get ${url}/favicon.ico`);
       Http.downloadFile(`${url}/favicon.ico`, {}, {},
         pth,
         (entry: any) => {
@@ -98,9 +99,11 @@ export class HistoryService {
   private async setPWAIcon(url: string, service: Service): Promise<string> {
     return new Promise((resolve, reject) => {
       Http.setDataSerializer('raw');
+      console.log(`pwa.get ${url}`);
       Http.get(url, {}, {}, async (response: any) => {
         const appleIconUrl = this.findInHTML(response.data);
         if (!appleIconUrl) {
+          reject('apple icon not found');
           return;
         }
         const fullUrl = this.joinUrl(url, appleIconUrl);
@@ -156,8 +159,7 @@ export class HistoryService {
   private findInHTML(html: string): string | undefined {
     try {
       const data = getStringFrom(html, `<link rel="apple-touch-icon"`, `>`);
-      if (data) {
-        
+      if (data) {        
         const href = getStringFrom(data, `href="`, `"`);
         if (!href) {
           console.log(`Icon not found in ${data}`);
