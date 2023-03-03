@@ -40,28 +40,33 @@ export class UrlService {
   }
 
   public getDeepLink(): string | undefined {
-    let slug = this.slug;
-    if (!slug) return undefined;
-    slug = decodeURIComponent(slug);
-    let valid = false;
-    if (slug.startsWith('/')) {
-      slug = slug.slice(1);
-    }
-    // Only work with ip/port
-    const ipPort = slug.split(':');
-    if (ipPort?.length == 2) {
-      if (this.isIp(ipPort[0])) {
-        valid = true;
+    try {
+      let slug = this.slug;
+      if (!slug) return undefined;
+      slug = decodeURIComponent(slug);
+      let valid = false;
+      if (slug.startsWith('/')) {
+        slug = slug.slice(1);
       }
+      // Only work with ip/port
+      const ipPort = slug.split(':');
+      if (ipPort?.length == 2) {
+        if (this.isIp(ipPort[0])) {
+          valid = true;
+        }
+      }
+      if (!valid) {
+        console.warn(`Deep link to "${this.slug}" is not valid`);
+        return;
+      } else {
+        console.log(`Deep link to "${this.slug}" looks good`);
+      }
+      this.slug = undefined;
+      return slug;
+    } catch (err) {
+      console.error('getDeepLink', err);
+      return undefined;
     }
-    if (!valid) {
-      console.warn(`Deep link to "${this.slug}" is not valid`);
-      return;
-    } else {
-      console.log(`Deep link to "${this.slug}" looks good`);
-    }
-    this.slug = undefined;    
-    return slug;
   }
 
   private isIp(val: string): boolean {
