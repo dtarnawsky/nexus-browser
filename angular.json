@@ -24,7 +24,12 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
-              },           
+              },     
+              {
+                "glob": "**/*",
+                "input": ".well-known",
+                "output": ".well-known"
+              },        
               {
                 "glob": "app-data.json",
                 "input": "assets",
