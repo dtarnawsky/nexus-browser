@@ -5,9 +5,6 @@ project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/
 include ':capacitor-community-apple-sign-in'
 project(':capacitor-community-apple-sign-in').projectDir = new File('../node_modules/@capacitor-community/apple-sign-in/android')
 
-include ':capacitor-community-image-to-text'
-project(':capacitor-community-image-to-text').projectDir = new File('../node_modules/@capacitor-community/image-to-text/android')
-
 include ':capacitor-community-keep-awake'
 project(':capacitor-community-keep-awake').projectDir = new File('../node_modules/@capacitor-community/keep-awake/android')
 
