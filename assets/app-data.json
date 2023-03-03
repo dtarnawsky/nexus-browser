@@ -5,10 +5,6 @@
       "version": "4.0.0"
     },
     {
-      "name": "@capacitor-community/image-to-text",
-      "version": "4.0.2"
-    },
-    {
       "name": "@capacitor-community/keep-awake",
       "version": "3.0.0"
     },
@@ -90,7 +86,7 @@
     },
     {
       "name": "@ionic-enterprise/auth",
-      "version": "4.0.0-rc.1"
+      "version": "4.0.0"
     },
     {
       "name": "@ionic-enterprise/identity-vault",

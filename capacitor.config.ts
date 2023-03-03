@@ -8,14 +8,18 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
   backgroundColor: '#333333',
   loggingBehavior: 'none',
-  server: {    
+  server: {
     allowNavigation: ['*'],
     cleartext: true,
     errorPath: 'error.html'
   },
   android: {
     allowMixedContent: true,
-    backgroundColor: '#333333'
+    backgroundColor: '#333333',
+    buildOptions: {
+      keystorePath: '/Volumes/CodeDrive/Code/nexus-browser-1/keys/AndroidKeys',
+      keystoreAlias: 'key0',
+    }
   },
   plugins: {
     SplashScreen: {
@@ -24,8 +28,8 @@ const config: CapacitorConfig = {
       splashImmersive: false,
       launchAutoHide: false
     },
-    Keyboard: {      
-      style: KeyboardStyle.Dark,      
+    Keyboard: {
+      style: KeyboardStyle.Dark,
     },
     CapacitorHttp: {
       enabled: false

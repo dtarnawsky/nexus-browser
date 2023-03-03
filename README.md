@@ -14,7 +14,6 @@ Run all your standard Capacitor CLI commands to build and run on iOS and Android
 The following plugins are preinstalled
 <!--- Generated Plugins -->
  - **@capacitor-community/apple-sign-in** - 4.0.0
- - **@capacitor-community/image-to-text** - 4.0.2
  - **@capacitor-community/keep-awake** - 3.0.0
  - **@capacitor/app** - 4.1.1
  - **@capacitor/browser** - 4.1.1
@@ -35,7 +34,7 @@ The following plugins are preinstalled
  - **@capacitor/status-bar** - 4.1.1
  - **@capacitor/text-zoom** - 4.1.0
  - **@capacitor/toast** - 4.1.0
- - **@ionic-enterprise/auth** - 4.0.0-rc.1
+ - **@ionic-enterprise/auth** - 4.0.0
  - **@ionic-enterprise/identity-vault** - 5.9.6
  - **@ionic-enterprise/secure-storage** - 3.0.0
  - **@sentry/capacitor** - 0.11.2
@@ -53,4 +52,5 @@ Available in the [App Store](https://apps.apple.com/us/app/nexus-web-browser/id6
 ## Play Store
 
 Available in the [Play Store](https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus).
+
 

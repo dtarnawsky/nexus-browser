@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "com.nexusconcepts.nexus",
+                 "sha256_cert_fingerprints": ["BD:B3:F2:CF:72:51:58:3D:BA:AE:2F:87:4E:21:26:0F:50:40:6A:4F:C7:E3:DD:1F:5B:48:07:55:7E:DA:AC:BE"] }
+  }]
