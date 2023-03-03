@@ -1,8 +1,12 @@
 {
   "plugins": [
     {
-      "name": "@capacitor-community/image-to-text",
-      "version": "4.0.2"
+      "name": "@capacitor-community/apple-sign-in",
+      "version": "4.0.0"
+    },
+    {
+      "name": "@capacitor-community/keep-awake",
+      "version": "3.0.0"
     },
     {
       "name": "@capacitor/app",
@@ -79,6 +83,22 @@
     {
       "name": "@capacitor/toast",
       "version": "4.1.0"
+    },
+    {
+      "name": "@ionic-enterprise/auth",
+      "version": "4.0.0"
+    },
+    {
+      "name": "@ionic-enterprise/identity-vault",
+      "version": "5.9.6"
+    },
+    {
+      "name": "@ionic-enterprise/secure-storage",
+      "version": "3.0.0"
+    },
+    {
+      "name": "@sentry/capacitor",
+      "version": "0.11.2"
     },
     {
       "name": "cordova-plugin-advanced-http",

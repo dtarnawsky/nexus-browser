@@ -11,6 +11,8 @@ import { delay } from './util.service';
 })
 export class UrlService {
 
+  private slug: string | undefined;
+
   constructor(private historyService: HistoryService) {
   }
 
@@ -33,6 +35,44 @@ export class UrlService {
     return await this.testUrl(url);
   }
 
+  public deepLink(slug: string) {
+    this.slug = slug;
+  }
+
+  public getDeepLink(): string | undefined {
+    try {
+      let slug = this.slug;
+      if (!slug) return undefined;
+      slug = decodeURIComponent(slug);
+      let valid = false;
+      if (slug.startsWith('/')) {
+        slug = slug.slice(1);
+      }
+      // Only work with ip/port
+      const ipPort = slug.split(':');
+      if (ipPort?.length == 2) {
+        if (this.isIp(ipPort[0])) {
+          valid = true;
+        }
+      }
+      if (!valid) {
+        console.warn(`Deep link to "${this.slug}" is not valid`);
+        return;
+      } else {
+        console.log(`Deep link to "${this.slug}" looks good`);
+      }
+      this.slug = undefined;
+      return slug;
+    } catch (err) {
+      console.error('getDeepLink', err);
+      return undefined;
+    }
+  }
+
+  private isIp(val: string): boolean {
+    return (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(val));
+  }
+
   private async testUrl(url: string): Promise<string | undefined> {
     let hasRetried = false;
     let retry;
@@ -42,10 +82,11 @@ export class UrlService {
         if (!Capacitor.isNativePlatform()) {
           window.open(url);
         } else {
-          const response: HttpResponse = await CapacitorHttp.get({ url });
-          if (response.status == 200) {
-            if (this.isHttp(url)) {
-              window.location.href = url;
+          const launchInternal = this.isHttp(url) || this.allowed(url);
+          if (!launchInternal) {
+            const response: HttpResponse = await CapacitorHttp.get({ url });
+            if (response.status !== 200) {
+              return `${url} responded with the status code ${response.status}`;
             } else {
               if (Capacitor.getPlatform() === 'ios') {
                 await Browser.open({ url, toolbarColor: '111111' });
@@ -56,11 +97,11 @@ export class UrlService {
               this.getIcon(url);
             }
           } else {
-            return `${url} responded with the status code ${response.status}`;
+            window.location.href = url;
           }
         }
       } catch (error) {
-        console.error('er', error);
+        console.error(`Unable to verify ${url}`, error);
         const message = (error as any).message;
 
         if ((message == 'The Internet connection appears to be offline.') && !hasRetried) {
@@ -76,6 +117,12 @@ export class UrlService {
     }
     while (retry);
     return;
+  }
+
+  // Return if this site can be viewed in the app (true)
+  // or will launch a browser window
+  private allowed(url: string): boolean {
+    return url?.includes('.appflowapp.com');
   }
 
   private getIcon(url: string) {

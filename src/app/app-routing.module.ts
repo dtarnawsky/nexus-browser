@@ -18,6 +18,11 @@ const routes: Routes = [
   {
     path: 'capacitor',
     loadChildren: () => import('./capacitor/capacitor.module').then( m => m.CapacitorPageModule)
+  },
+  {
+    path: ':id',
+    redirectTo: 'capacitor', // First time users get directed here
+    pathMatch: 'full'
   }
 ];
 

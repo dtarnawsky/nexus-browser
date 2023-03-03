@@ -14,14 +14,25 @@
     margin-right: 20px;
 }
 
-.link {
-    cursor: pointer;
-    color: var(--ion-text-color);
-    text-decoration: none;
-    font-weight: bold;
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
 }
 
-.link:hover {    
+a {
+    cursor: pointer;
+    color: var(--ion-color-primary-contrast);
+    text-decoration: none;
+}
+
+h3 {
+    color: var(--ion-color-primary-contrast);
+}
+
+a:hover {
     border-bottom: 1px solid var(--ion-color-light);
 }
 
@@ -39,12 +50,12 @@
     margin-top: 100px;
 }
 
-.plugin {
+.section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    max-width: 550px;
+    max-width: 600px;
     align-items: flex-end;
 }
 
@@ -62,17 +73,20 @@ p.store {
     cursor: pointer;
 }
 
-p.text {
+.text {
     font-size: medium;
     margin: 5px;
     padding: 0;
     line-height: 1.6;
-    opacity: 0.5;
 }
 
 @media only screen and (min-width: 600px) {
-    p.text {
+    .text {
         font-size: x-large;
+    }
+
+    h3 {
+        font-size: xx-large;
     }
 }
 
@@ -86,8 +100,13 @@ ion-icon {
 i {
     font-style: normal;
     font-family: 'Courier', monospace;
-    color: var(--ion-text-color);   
+    color: var(--ion-text-color);
+}
+
+.logo {
+    width: 180px;
   }
+  
 
 qrcode {
     background-color: white;

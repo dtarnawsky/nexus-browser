@@ -8,12 +8,22 @@
 }
 
 .icon {
-    width: 96px;
+    //width: 100%;
 }
 
 .icon-button {
     width: 96px;
-    height: 96px;
+    height: 96px;    
+}
+
+button {
+    border-radius: 16px;
+    margin: 3px;
+}
+
+button:hover {
+    opacity: 0.9;
+    scale: 1.05;
 }
 
 ion-label {
