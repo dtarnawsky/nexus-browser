@@ -11,6 +11,8 @@ import { delay } from './util.service';
 })
 export class UrlService {
 
+  private slug: string | undefined;
+
   constructor(private historyService: HistoryService) {
   }
 
@@ -31,6 +33,39 @@ export class UrlService {
       localStorage['siteURL'] = url;
     }
     return await this.testUrl(url);
+  }
+
+  public deepLink(slug: string) {
+    this.slug = slug;
+  }
+
+  public getDeepLink(): string | undefined {
+    let slug = this.slug;
+    if (!slug) return undefined;
+    slug = decodeURIComponent(slug);
+    let valid = false;
+    if (slug.startsWith('/')) {
+      slug = slug.slice(1);
+    }
+    // Only work with ip/port
+    const ipPort = slug.split(':');
+    if (ipPort?.length == 2) {
+      if (this.isIp(ipPort[0])) {
+        valid = true;
+      }
+    }
+    if (!valid) {
+      console.warn(`Deep link to "${this.slug}" is not valid`);
+      return;
+    } else {
+      console.log(`Deep link to "${this.slug}" looks good`);
+    }
+    this.slug = undefined;    
+    return slug;
+  }
+
+  private isIp(val: string): boolean {
+    return (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(val));
   }
 
   private async testUrl(url: string): Promise<string | undefined> {

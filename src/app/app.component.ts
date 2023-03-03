@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
+import { UrlService } from './url.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private urlService: UrlService) {
+    this.initializeApp();
+  }
+
+  private initializeApp() {
+    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+      const slug = event.url.split(".com").pop();
+      if (slug) {
+        this.urlService.deepLink(slug);
+      }
+    });
+  }
+
 }

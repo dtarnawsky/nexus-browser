@@ -114,7 +114,7 @@ export class HistoryService {
         const pth: string = (await Filesystem.getUri({ path: `${service.id}${ext}`, directory: Directory.Data })).uri;
         Http.downloadFile(fullUrl, {}, {},
           pth,
-          (entry: any) => {            
+          (entry: any) => {
             resolve(entry.nativeURL);
           },
           (err: any) => {
@@ -159,7 +159,7 @@ export class HistoryService {
   private findInHTML(html: string): string | undefined {
     try {
       const data = getStringFrom(html, `<link rel="apple-touch-icon"`, `>`);
-      if (data) {        
+      if (data) {
         const href = getStringFrom(data, `href="`, `"`);
         if (!href) {
           console.log(`Icon not found in ${data}`);
@@ -196,6 +196,13 @@ export class HistoryService {
       return '';
     }
     url = url.toLowerCase().trim();
+    if (url.includes('nexusbrowser.com/')) {
+      // Likely a deep link like: https://nexusbrowser.com/192.168.0.125%3A8101
+      const part = url.split('nexusbrowser.com/');
+      if (part[1]) {
+        url = decodeURIComponent(part[1]);
+      }
+    }
     if (!url.startsWith('http')) {
       if (url.match(/^\d/)) {
         // Assume http for ip addresses

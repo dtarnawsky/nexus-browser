@@ -3,6 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>com.apple.developer.associated-domains</key>
-	<array/>
+	<array>
+		<string>applinks:nexusbrowser.com</string>
+		<string>applinks:capacitor.nexusbrowser.com</string>
+	</array>
 </dict>
 </plist>

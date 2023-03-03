@@ -18,6 +18,7 @@ import { Role, SettingsService } from '../settings.service';
 import { UIService } from '../ui.service';
 import { UrlService } from '../url.service';
 import { Router } from '@angular/router';
+import { App } from '@capacitor/app';
 
 interface HomeModel {
   url: string;
@@ -62,6 +63,13 @@ export class HomePage implements OnInit {
     if (Capacitor.getPlatform() === 'ios') {
       await Keyboard.setResizeMode({ mode: KeyboardResize.None });
     }
+
+    App.addListener('resume', () => {
+      this.ngZone.run(() => {
+        this.checkDeepLink();
+      });
+    });
+
     Keyboard.addListener('keyboardWillShow', () => {
       this.ngZone.run(() => {
         this.vm.hideHistory = true;
@@ -81,6 +89,17 @@ export class HomePage implements OnInit {
 
     IonicDiscover.start(); // Note: we cannot await    
     setInterval(async () => { this.discover() }, 2000);
+
+    this.checkDeepLink();
+  }
+
+  private checkDeepLink() {
+    setTimeout(() => {
+      const url = this.urlService.getDeepLink();
+      if (url) {
+        this.connect(url, false);
+      }
+    }, 1000);
   }
 
   async discover() {
@@ -94,6 +113,7 @@ export class HomePage implements OnInit {
       const idx = this.vm.services.findIndex((found) => found.id == service.id);
       if (idx == -1) {
         this.vm.services.push(service);
+        this.ui.keepAwake();
       }
     }
   }
@@ -101,8 +121,9 @@ export class HomePage implements OnInit {
   /**
    * Go to a url entered by the user
    * @param  {string} url
+   * @param {boolean} save Whether to save as a shortcut
    */
-  public async connect(url: string) {
+  public async connect(url: string, save?: boolean) {
     const fullUrl = this.historyService.toFullUrl(url);
 
     if (!this.historyService.isValidUrl(fullUrl)) {
@@ -112,7 +133,7 @@ export class HomePage implements OnInit {
     }
 
     await delay(300);
-    this.visit(fullUrl, true);
+    this.visit(fullUrl, save !== false);
   }
 
   public async open(action: ShortcutAction, service: Service) {
