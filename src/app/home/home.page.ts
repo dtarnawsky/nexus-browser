@@ -25,6 +25,7 @@ interface HomeModel {
   busy?: boolean;
   hideTutorial?: boolean;
   hideHistory?: boolean;
+  isNative: boolean;
   services: Service[];
 }
 
@@ -39,6 +40,7 @@ export class HomePage implements OnInit {
 
   public vm: HomeModel = {
     url: '',
+    isNative: Capacitor.isNativePlatform(),
     services: []
   };
 

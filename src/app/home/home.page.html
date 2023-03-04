@@ -16,7 +16,7 @@
     <form class="animate__animated animate__zoomIn" [hidden]="vm.busy" (submit)="connect(vm.url)">
       <input enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
         [(ngModel)]="vm.url" type="url" />
-      <ion-icon class="qr" name="qr-code-sharp" (click)="scan()"></ion-icon>
+      <ion-icon *ngIf="vm.isNative" class="qr" name="qr-code-sharp" (click)="scan()"></ion-icon>
     </form>
 
     <div class="ion-padding"></div>

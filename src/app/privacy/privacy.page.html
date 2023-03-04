@@ -1,15 +1,20 @@
-<ion-content color="dark">
+<ion-content color="dark" [fullscreen]="true">
+  <ion-fab *ngIf="isNative" class="safe-top" slot="fixed" horizontal="end" vertical="start">
+    <ion-fab-button routerLink="..">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div class="content">
     <picture>
       <img class="logo animate__animated animate__fadeInDown" src="assets/logo-nexus.svg" />
     </picture>
 
     <h1>Privacy Policy</h1>
-    <p>Nexus Concepts values your personal privacy rights. Our privacy policy is therefore
+    <p>Nexus Concepts (The company providing the Nexus Browser service) values your personal privacy rights. Our privacy policy is therefore
       adopted with a commitment to safeguarding these rights:</p>
 
     <h2>No Sharing of Information</h2>
-    <p>All information gathered is used by Nexus Concepts and Nexus Concepts staff only.
+    <p>All information gathered is used by Nexus Concepts staff only.
       Nexus Concepts does not sell or rent user information to anyone.
       Nexus Concepts does not share or cross-reference personal information gathered through
       site usage with any other databases or third parties.</p>
@@ -20,11 +25,11 @@
       website.</p>
 
     <h2>Use of Cookies</h2>
-    <p>As part of the Nexus Concepts website and Nexus Browser App there is no use of cookies.
+    <p>As part of the Nexus Browser website and Nexus Browser App there is no use of cookies.
       Cookies may be used when when visiting a website within the Nexus Browser App.</p>
 
     <h2>Security of Service</h2>
-    <p>We protect your privacy using standard encryption techniques as well as providing the Nexus Concepts website and
+    <p>We protect your privacy using standard encryption techniques as well as providing the Nexus Browser website and
       api
       service via HTTPS. However, no data transmission over the Internet can be guaranteed to be 100% secure. As a
       result,
@@ -34,9 +39,9 @@
 
 
     <h2>Comments</h2>
-    <p>We make every effort to maximize your privacy rights while you use logthere.com and the Nexus Concepts service.
+    <p>We make every effort to maximize your privacy rights while you use nexusbrowser.com and the Nexus Browser service.
       If
       you have any questions, concerns or comments, regarding our privacy policy or any other aspect of our service,
-      please e-mail us.</p>
+      please <a href="mailto:support@nexusbrowser.com">e-mail us</a>.</p>
   </div>
 </ion-content>

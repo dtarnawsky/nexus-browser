@@ -252,3 +252,7 @@
 .action-sheet-button.sc-ion-action-sheet-ios {
 color: var(--ion-text-color);
 }
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
