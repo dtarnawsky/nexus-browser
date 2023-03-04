@@ -9,7 +9,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slide.component.scss'],
 })
 export class SlideComponent {
-
-  constructor() { }
-
+  constructor() {}
 }

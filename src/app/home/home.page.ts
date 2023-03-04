@@ -37,11 +37,10 @@ interface HomeModel {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
   public vm: HomeModel = {
     url: '',
     isNative: Capacitor.isNativePlatform(),
-    services: []
+    services: [],
   };
 
   constructor(
@@ -54,7 +53,7 @@ export class HomePage implements OnInit {
     private urlService: UrlService,
     private actionSheetCtrl: ActionSheetController,
     private settingsService: SettingsService
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.load();
@@ -89,8 +88,10 @@ export class HomePage implements OnInit {
     await StatusBar.setStyle({ style: Style.Dark });
     await SplashScreen.hide();
 
-    IonicDiscover.start(); // Note: we cannot await    
-    setInterval(async () => { this.discover() }, 2000);
+    IonicDiscover.start(); // Note: we cannot await
+    setInterval(async () => {
+      this.discover();
+    }, 2000);
 
     this.checkDeepLink();
   }
@@ -145,7 +146,7 @@ export class HomePage implements OnInit {
         break;
       }
       case ShortcutAction.click: {
-        // IonicDiscover.stop();                
+        // IonicDiscover.stop();
         const url = `${service.address}${service.port ? ':' + service.port : ''}`;
         const save = !service.hostname;
         await this.visit(this.historyService.toFullUrl(url), save);
@@ -161,8 +162,12 @@ export class HomePage implements OnInit {
   public async settings() {
     const action = await this.settingsService.presentSettings(this.actionSheetCtrl);
     switch (action) {
-      case Role.destructive: this.clearHistory(); break;
-      case Role.privacy: this.router.navigateByUrl('/privacy'); break;
+      case Role.destructive:
+        this.clearHistory();
+        break;
+      case Role.privacy:
+        this.router.navigateByUrl('/privacy');
+        break;
     }
   }
 
@@ -213,5 +218,4 @@ export class HomePage implements OnInit {
       this.open(ShortcutAction.click, service);
     }
   }
-
 }

@@ -6,8 +6,8 @@ import { CapacitorPage } from './capacitor.page';
 const routes: Routes = [
   {
     path: '',
-    component: CapacitorPage
-  }
+    component: CapacitorPage,
+  },
 ];
 
 @NgModule({

@@ -7,14 +7,12 @@ import { HistoryService } from './history.service';
 import { delay } from './util.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UrlService {
-
   private slug: string | undefined;
 
-  constructor(private historyService: HistoryService) {
-  }
+  constructor(private historyService: HistoryService) {}
 
   public async visit(url: string, save: boolean): Promise<string | undefined> {
     if (Capacitor.isNativePlatform()) {
@@ -70,7 +68,9 @@ export class UrlService {
   }
 
   private isIp(val: string): boolean {
-    return (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(val));
+    return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
+      val
+    );
   }
 
   private async testUrl(url: string): Promise<string | undefined> {
@@ -104,8 +104,8 @@ export class UrlService {
         console.error(`Unable to verify ${url}`, error);
         const message = (error as any).message;
 
-        if ((message == 'The Internet connection appears to be offline.') && !hasRetried) {
-          // First installation shows a prompt to access local network. So we retry after that          
+        if (message == 'The Internet connection appears to be offline.' && !hasRetried) {
+          // First installation shows a prompt to access local network. So we retry after that
           retry = true;
           hasRetried = true;
           await delay(2500);
@@ -114,8 +114,7 @@ export class UrlService {
           return message;
         }
       }
-    }
-    while (retry);
+    } while (retry);
     return;
   }
 

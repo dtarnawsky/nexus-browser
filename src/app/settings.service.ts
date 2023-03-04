@@ -6,15 +6,14 @@ export enum Role {
   destructive = 'destructive',
   cancel = 'cancel',
   go = 'go',
-  privacy = 'privacy'
+  privacy = 'privacy',
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SettingsService {
-
-  constructor() { }
+  constructor() {}
 
   public async presentSettings(ctrl: ActionSheetController): Promise<Role> {
     const actionSheet = await ctrl.create({
@@ -46,7 +45,6 @@ export class SettingsService {
   }
 
   public async presentActions(ctrl: ActionSheetController, service: Service): Promise<Role> {
-
     const delBtn = {
       text: 'Delete',
       role: Role.destructive,
@@ -64,18 +62,21 @@ export class SettingsService {
     let buttons = [delBtn, cancelBtn];
 
     if (service.port) {
-      buttons = [{
-        text: service.address + ':' + service.port,
-        role: Role.go,
-        data: {
-          action: 'go',
+      buttons = [
+        {
+          text: service.address + ':' + service.port,
+          role: Role.go,
+          data: {
+            action: 'go',
+          },
         },
-      }, cancelBtn];
+        cancelBtn,
+      ];
     }
     const actionSheet = await ctrl.create({
       header: service.name,
       subHeader: service.hostname,
-      buttons
+      buttons,
     });
 
     await actionSheet.present();

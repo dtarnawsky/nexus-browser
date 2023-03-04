@@ -9,13 +9,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./slides.component.scss'],
 })
 export class SlidesComponent {
-
   currentIndex: number = 0;
   lastIndex: number = 0;
   slides = ['1', '2', '3'];
   @ViewChild('slider', { read: ElementRef }) slider: any;
 
-  constructor() { }
+  constructor() {}
 
   changeSlide(index: number) {
     this.currentIndex = index;
@@ -29,5 +28,4 @@ export class SlidesComponent {
       this.currentIndex = index;
     }
   }
-
 }

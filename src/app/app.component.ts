@@ -14,11 +14,10 @@ export class AppComponent {
 
   private initializeApp() {
     App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-      const slug = event.url.split(".com").pop();
+      const slug = event.url.split('.com').pop();
       if (slug) {
         this.urlService.deepLink(slug);
       }
     });
   }
-
 }

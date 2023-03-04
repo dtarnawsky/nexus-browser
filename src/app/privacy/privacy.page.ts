@@ -7,10 +7,7 @@ import { Capacitor } from '@capacitor/core';
   styleUrls: ['./privacy.page.scss'],
 })
 export class PrivacyPage {
+  isNative: boolean = Capacitor.isNativePlatform();
 
-  isNative: boolean = Capacitor.isNativePlatform()
-
-  constructor() { }
-
-
+  constructor() {}
 }

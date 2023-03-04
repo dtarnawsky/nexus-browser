@@ -6,7 +6,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 export enum ShortcutAction {
   click,
-  press
+  press,
 }
 
 @Component({
@@ -17,10 +17,9 @@ export enum ShortcutAction {
   styleUrls: ['./shortcut.component.scss'],
 })
 export class ShortcutComponent {
-
   @Input() service: Service = { address: 'localhost', name: 'domain' };
   @Output() clicked = new EventEmitter<ShortcutAction>();
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {}
 
   click() {
     this.clicked.emit(ShortcutAction.click);
@@ -33,5 +32,4 @@ export class ShortcutComponent {
   safeUrl(url: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
-
 }

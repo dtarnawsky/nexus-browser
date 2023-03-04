@@ -9,13 +9,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { CapacitorPage } from './capacitor.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CapacitorPageRoutingModule,
-    QRCodeModule
-  ],
-  declarations: [CapacitorPage]
+  imports: [CommonModule, FormsModule, IonicModule, CapacitorPageRoutingModule, QRCodeModule],
+  declarations: [CapacitorPage],
 })
 export class CapacitorPageModule {}
