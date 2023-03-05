@@ -19,7 +19,6 @@ import { UIService } from '../ui.service';
 import { UrlService } from '../url.service';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
-import { Preferences } from '@capacitor/preferences';
 
 interface HomeModel {
   url: string;
@@ -57,7 +56,7 @@ export class HomePage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    await this.setRemoteURL(undefined);
+    await this.urlService.setRemoteURL(undefined);
     await this.load();
 
     if (!Capacitor.isNativePlatform()) {
@@ -130,7 +129,7 @@ export class HomePage implements OnInit {
    */
   public async connect(url: string, save?: boolean) {
     const fullUrl = this.historyService.toFullUrl(url);
-
+    this.urlService.setRemoteURL(fullUrl);
     if (!this.historyService.isValidUrl(fullUrl)) {
       await this.ui.alert(this.alert, 'Enter a valid url');
       this.ui.focus('devServerUrl');
@@ -151,25 +150,13 @@ export class HomePage implements OnInit {
         // IonicDiscover.stop();
         const url = `${service.address}${service.port ? ':' + service.port : ''}`;
         const save = !service.hostname;
-        await this.setRemoteURL(service);
         await this.visit(this.historyService.toFullUrl(url), save);
         break;
       }
     }
   }
 
-  // Set the remote logging URL Capacitor will report to
-  private async setRemoteURL(service: Service | undefined) {
-    if (!service) {
-      await Preferences.remove({ key: 'RemoteLoggingURL' });
-      return;
-    }
-    await Preferences.set({
-      key: 'RemoteLoggingURL',
-      value: `http://${service.address}:8942`,
-    });
 
-  }
 
   public async clearHistory() {
     this.vm.services = await this.historyService.clear();
@@ -205,6 +192,7 @@ export class HomePage implements OnInit {
   private async visit(url: string, save: boolean) {
     try {
       this.vm.busy = true;
+      await this.urlService.setRemoteURL(url);
       const error = await this.urlService.visit(url, save);
       await this.load();
       if (error) {

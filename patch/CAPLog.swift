@@ -27,33 +27,44 @@ public class CAPLog {
         if (msg.starts(with: "⚡️  [log] - ")) {
             level = "info"
             msg = msg.replacingOccurrences(of: "⚡️  [log] - ", with: "")
-        }
-        if (msg.starts(with: "⚡️  [error] - ")) {
+        } else if (msg.starts(with: "⚡️  To Native ->  ")) {
+            level = "cap-native"
+            msg = msg.replacingOccurrences(of: "⚡️  To Native ->  ", with: "")
+        } else if (msg.starts(with: "⚡️  TO JS ")) {
+            level = "cap-js"
+            msg = msg.replacingOccurrences(of: "⚡️  TO JS ", with: "")
+        } else if (msg.starts(with: "⚡️  [error] - ")) {
             level = "error"
             msg = msg.replacingOccurrences(of: "⚡️  [error] - ", with: "")
-        }
-        if (msg.starts(with: "⚡️  [warn] - ")) {
+        } else if (msg.starts(with: "⚡️  [warn] - ")) {
             level = "warn"
             msg = msg.replacingOccurrences(of: "⚡️  [warn] - ", with: "")
+        } else if (msg.starts(with: "⚡️  ")) {
+            level = "cap"
+            msg = msg.replacingOccurrences(of: "⚡️  ", with: "")
         }
         
-        let jsonObject: [String: Any] = [
-            "message": msg,
-            "level": level
-        ]
-        let ob = [ jsonObject ]
-        let jsonData = try? JSONSerialization.data(withJSONObject: ob)
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        do {
+            let jsonObject: [String: Any] = [
+                "message": msg,
+                "level": level
+            ]
+            let ob = [ jsonObject ]
+            let jsonData = try? JSONSerialization.data(withJSONObject: ob)
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            }
+            task.resume()
+        } catch {
+            Swift.print("Remote Server url is not available");
         }
-        task.resume()
     }
     
     // Get from preferences

@@ -5,6 +5,7 @@ import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 import { InAppBrowser } from './cordova-plugins';
 import { HistoryService } from './history.service';
 import { delay } from './util.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { delay } from './util.service';
 export class UrlService {
   private slug: string | undefined;
 
-  constructor(private historyService: HistoryService) {}
+  constructor(private historyService: HistoryService) { }
 
   public async visit(url: string, save: boolean): Promise<string | undefined> {
     if (Capacitor.isNativePlatform()) {
@@ -65,6 +66,36 @@ export class UrlService {
       console.error('getDeepLink', err);
       return undefined;
     }
+  }
+
+  // Set the remote logging URL Capacitor will report to
+  public async setRemoteURL(url: string | undefined) {
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+    if (!url) {
+      await Preferences.remove({ key: 'RemoteLoggingURL' });
+      return;
+    }
+    const domain = this.getDomain(url);
+    if (!domain) return;
+    await Preferences.set({
+      key: 'RemoteLoggingURL',
+      value: `http://${domain}:8942`,
+    });
+
+  }
+
+  private getDomain(url: string): string | undefined {
+    let domain = url.toLowerCase().replace('http://', '').replace('https://', '');
+    if (domain.includes(':')) {
+      const tmp = domain.split(':');
+      domain = tmp[0];
+    }
+    if (domain.includes('/')) {
+      return;
+    }
+    return domain;
   }
 
   private isIp(val: string): boolean {
