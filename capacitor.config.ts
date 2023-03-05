@@ -6,8 +6,7 @@ const config: CapacitorConfig = {
   appName: 'capview',
   webDir: 'www',
   bundledWebRuntime: false,
-  backgroundColor: '#333333',
-  loggingBehavior: 'none',
+  backgroundColor: '#333333',  
   server: {
     allowNavigation: ['*'],
     cleartext: true,

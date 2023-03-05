@@ -19,6 +19,7 @@ import { UIService } from '../ui.service';
 import { UrlService } from '../url.service';
 import { Router } from '@angular/router';
 import { App } from '@capacitor/app';
+import { Preferences } from '@capacitor/preferences';
 
 interface HomeModel {
   url: string;
@@ -53,9 +54,10 @@ export class HomePage implements OnInit {
     private urlService: UrlService,
     private actionSheetCtrl: ActionSheetController,
     private settingsService: SettingsService
-  ) {}
+  ) { }
 
   async ngOnInit() {
+    await this.setRemoteURL(undefined);
     await this.load();
 
     if (!Capacitor.isNativePlatform()) {
@@ -149,10 +151,24 @@ export class HomePage implements OnInit {
         // IonicDiscover.stop();
         const url = `${service.address}${service.port ? ':' + service.port : ''}`;
         const save = !service.hostname;
+        await this.setRemoteURL(service);
         await this.visit(this.historyService.toFullUrl(url), save);
         break;
       }
     }
+  }
+
+  // Set the remote logging URL Capacitor will report to
+  private async setRemoteURL(service: Service | undefined) {
+    if (!service) {
+      await Preferences.remove({ key: 'RemoteLoggingURL' });
+      return;
+    }
+    await Preferences.set({
+      key: 'RemoteLoggingURL',
+      value: `http://${service.address}:8942`,
+    });
+
   }
 
   public async clearHistory() {
