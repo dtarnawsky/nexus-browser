@@ -38,6 +38,15 @@
 - Web core vitals
 - Show duplicate API calls (eg identify pages where caching would help)
 
+## Testing
+- Execute JS defined in VS Code
+- API to simplify interactions, model on Cypress?
+- VS Code feature to run tests and show pass/fails
+- Capture DOM replay or video
+- Emulate Identity Vault
+- Automate ionic components
+- Option to autostart based on app detection
+
 ## Bugs
 - Some urls have errors: Disneyland, Mixcloud, Macdonalds, Ubereats, Phanpy.social
 - Make sure stopping dev web server stops the icon from appearing in the app

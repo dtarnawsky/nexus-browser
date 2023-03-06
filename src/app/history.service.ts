@@ -28,6 +28,9 @@ export class HistoryService {
       this.services = services.map((service: Service) => {
         return this.cleanup(service);
       });
+
+      // Filter out auto detected shortcuts
+      this.services = this.services.filter((service) => { return service.hostname == undefined});
     }
     return this.services;
   }
