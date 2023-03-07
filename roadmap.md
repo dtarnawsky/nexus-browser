@@ -19,7 +19,6 @@
 
 ## Remote Logging Features
 - Add `DisableRemoteLogging` to UDP broadcast to prevent logging back to VS Code
-- Log device name as part of first send to VS Code
 - Log with device ID and generate/save device ID
 - Capture fetch calls and log them (method, url, content size, latency)
 - Capture line number and source file for console logs

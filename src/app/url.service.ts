@@ -6,6 +6,7 @@ import { InAppBrowser } from './cordova-plugins';
 import { HistoryService } from './history.service';
 import { delay } from './util.service';
 import { Preferences } from '@capacitor/preferences';
+import { Device } from '@capacitor/device';
 
 @Injectable({
   providedIn: 'root',
@@ -78,12 +79,15 @@ export class UrlService {
       return;
     }
     const domain = this.getDomain(url);
-    if (!domain) return;
+    if (!domain) return; // This ensure we only get through if we're using an address and port
+    
+    const info = await Device.getInfo();
     await Preferences.set({
       key: 'RemoteLoggingURL',
       value: `http://${domain}:8942`,
     });
 
+    console.log(`Connected from ${info.manufacturer} ${info.name} version ${info.osVersion}`);
   }
 
   private getDomain(url: string): string | undefined {
