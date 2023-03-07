@@ -22,25 +22,31 @@ public class CAPLog {
             return
         }
         let url = URL(string: rAddress! + "/log")!
-        var level = "ios"
+        var level = "capacitor"
         var msg = message
         if (msg.starts(with: "⚡️  [log] - ")) {
             level = "info"
             msg = msg.replacingOccurrences(of: "⚡️  [log] - ", with: "")
         } else if (msg.starts(with: "⚡️  To Native ->  ")) {
-            level = "cap-native"
+            level = "capacitor"
             msg = msg.replacingOccurrences(of: "⚡️  To Native ->  ", with: "")
         } else if (msg.starts(with: "⚡️  TO JS ")) {
-            level = "cap-js"
+            level = "capacitor-js"
             msg = msg.replacingOccurrences(of: "⚡️  TO JS ", with: "")
         } else if (msg.starts(with: "⚡️  [error] - ")) {
             level = "error"
             msg = msg.replacingOccurrences(of: "⚡️  [error] - ", with: "")
+        } else if (msg.starts(with: "To Native Cordova ->  ")) {
+            level = "cordova"
+            msg = msg.replacingOccurrences(of: "To Native Cordova ->  ", with: "")
+        } else if (msg.starts(with: "Error: ")) {
+            level = "error"
+            msg = msg.replacingOccurrences(of: "Error: ", with: "")
         } else if (msg.starts(with: "⚡️  [warn] - ")) {
             level = "warn"
             msg = msg.replacingOccurrences(of: "⚡️  [warn] - ", with: "")
         } else if (msg.starts(with: "⚡️  ")) {
-            level = "cap"
+            level = "capacitor"
             msg = msg.replacingOccurrences(of: "⚡️  ", with: "")
         }
         
