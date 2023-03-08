@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Service } from './discovery';
+import { App } from '@capacitor/app';
 
 export enum Role {
   destructive = 'destructive',
@@ -16,8 +17,10 @@ export class SettingsService {
   constructor() {}
 
   public async presentSettings(ctrl: ActionSheetController): Promise<Role> {
+    const info = await App.getInfo();
     const actionSheet = await ctrl.create({
       header: 'Settings',
+      subHeader: `v${info.version}.${info.build}`,
       buttons: [
         { text: 'Privacy Policy', role: Role.privacy },
         {
