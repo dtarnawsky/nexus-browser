@@ -119,6 +119,7 @@ export class UrlService {
         } else {
           const launchInternal = this.isHttp(url) || this.allowed(url);
           if (!launchInternal) {
+            console.log(`Call get ${url}`)
             const response: HttpResponse = await CapacitorHttp.get({ url });
             if (response.status !== 200) {
               return `${url} responded with the status code ${response.status}`;
@@ -146,7 +147,7 @@ export class UrlService {
           await delay(2500);
         } else {
           await this.historyService.remove(url);
-          return message;
+          return url + ': '+message;
         }
       }
     } while (retry);

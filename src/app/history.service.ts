@@ -246,7 +246,7 @@ export class HistoryService {
 
   private extractName(url: string): string {
     try {
-      let name = url.toLowerCase().replace('http://', '').replace('https://', '');
+      let name = url.toLowerCase().replace('http://', '').replace('https://', '').replace('www.','');
       name = name.charAt(0).toUpperCase() + name.slice(1);
       if (name.endsWith('.com')) {
         name = name.substring(0, name.length - 4);
