@@ -180,7 +180,7 @@ export class HomePage implements OnInit {
       this.vm.busy = true;
       const result = await this.scanService.scan();
       if (result.text) {
-        await this.connect(result.text);
+        await this.connect(result.text, false);
       }
     } catch (err) {
       this.ui.alert(this.alert, err as string);
