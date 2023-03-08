@@ -8,18 +8,17 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./capacitor.page.scss'],
 })
 export class CapacitorPage implements OnInit {
-
   opening: boolean = false;
   web: boolean = false;
   plugins: Plugin[] = [];
   appStoreUrl = 'https://apps.apple.com/us/app/nexus-web-browser/id6445866986';
   playStoreUrl = 'https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus';
 
-  constructor() { }
+  constructor() {}
 
   async ngOnInit() {
     //document.location.href = 'io.ionic.capview://launch';
-    this.web = !this.isAndroid() && !this.isIOS() && (Capacitor.getPlatform() == 'web');
+    this.web = !this.isAndroid() && !this.isIOS() && Capacitor.getPlatform() == 'web';
     let waitTime = this.web ? 5 : 5000;
     // const timer = setTimeout(() => {
     //   this.launchStore();
@@ -36,10 +35,17 @@ export class CapacitorPage implements OnInit {
       return;
     }
     switch (Capacitor.getPlatform()) {
-      case 'ios': this.openAppStore(); break;
-      case 'android': this.openPlayStore(); break;
-      case 'web': this.isIOS() ? this.openAppStore() : (this.isAndroid() ? this.openPlayStore() : this.showLinks()); break;
-      default: console.log(Capacitor.getPlatform());
+      case 'ios':
+        this.openAppStore();
+        break;
+      case 'android':
+        this.openPlayStore();
+        break;
+      case 'web':
+        this.isIOS() ? this.openAppStore() : this.isAndroid() ? this.openPlayStore() : this.showLinks();
+        break;
+      default:
+        console.log(Capacitor.getPlatform());
     }
   }
 
@@ -53,7 +59,7 @@ export class CapacitorPage implements OnInit {
 
   public url(name: string) {
     if (name.startsWith('@capacitor/')) {
-      return `https://capacitorjs.com/docs/apis/${name.replace('@capacitor/','')}`;
+      return `https://capacitorjs.com/docs/apis/${name.replace('@capacitor/', '')}`;
     }
     return `https://www.npmjs.com/package/${name}`;
   }
@@ -69,21 +75,16 @@ export class CapacitorPage implements OnInit {
   }
 
   public isIOS() {
-    return [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ].includes(navigator.platform)
+    return (
+      ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) ||
       // iPad on iOS 13 detection
-      || (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+      (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+    );
   }
 
   public isAndroid() {
     const ua = navigator.userAgent.toLowerCase();
-    return ua.indexOf("android") > -1;
+    return ua.indexOf('android') > -1;
   }
 }
 

@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync } from 'fs';
 async function list() {
   const data = JSON.parse(await getRunOutput('npm list --json', './'));
   const output: AppInfo = { plugins: [] };
-  const readmeLines = readFileSync('./README.md','utf8').split('\n');
+  const readmeLines = readFileSync('./README.md', 'utf8').split('\n');
   let md: string = '';
   for (let pkg of Object.keys(data.dependencies)) {
     let plugin = true;
@@ -23,16 +23,27 @@ async function list() {
     if (pkg.startsWith('__')) plugin = false;
     if (pkg.startsWith('angularx-qrcode')) plugin = false;
     if (pkg.startsWith('animate.css')) plugin = false;
-    if ([
-      'zone.js', 'typescript', 'tslib', 'rxjs', 'ionicons', '@capacitor/cli',
-      '@capacitor/assets', '@capacitor/android', '@capacitor/ios', '@capacitor/core'
-    ].includes(pkg)) plugin = false;
+    if (
+      [
+        'zone.js',
+        'typescript',
+        'tslib',
+        'rxjs',
+        'ionicons',
+        '@capacitor/cli',
+        '@capacitor/assets',
+        '@capacitor/android',
+        '@capacitor/ios',
+        '@capacitor/core',
+      ].includes(pkg)
+    )
+      plugin = false;
     if (plugin) {
       output.plugins.push({ name: pkg, version: data.dependencies[pkg].version });
       md += ` - **${pkg}** - ${data.dependencies[pkg].version}\n`;
     }
   }
-  writeFileSync('./assets/app-data.json', JSON.stringify(output, null, 2));  
+  writeFileSync('./assets/app-data.json', JSON.stringify(output, null, 2));
 
   let readme: string = '';
   let include = true;
@@ -51,34 +62,27 @@ async function list() {
   writeFileSync('./README.md', readme);
 }
 
-
-
 list();
 
 async function getRunOutput(command: string, folder: string): Promise<string> {
   return new Promise((resolve, reject) => {
     let out = '';
-    opts:
-    command = command;
-    child_process.exec(
-      command,
-      runOptions(folder),
-      (error, stdout, stdError) => {
-        if (stdout) {
-          out += stdout;
-        }
-        if (!error) {
-          resolve(out);
+    opts: command = command;
+    child_process.exec(command, runOptions(folder), (error, stdout, stdError) => {
+      if (stdout) {
+        out += stdout;
+      }
+      if (!error) {
+        resolve(out);
+      } else {
+        if (stdError) {
+          reject(stdError);
         } else {
-          if (stdError) {
-            reject(stdError);
-          } else {
-            // This is to fix a bug in npm outdated where it returns an exit code when it succeeds
-            resolve(out);
-          }
+          // This is to fix a bug in npm outdated where it returns an exit code when it succeeds
+          resolve(out);
         }
       }
-    );
+    });
   });
 }
 
@@ -89,7 +93,7 @@ function runOptions(folder: string) {
 }
 
 interface AppInfo {
-  plugins: Array<Plugin>
+  plugins: Array<Plugin>;
 }
 
 interface Plugin {

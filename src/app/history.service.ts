@@ -7,14 +7,13 @@ import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HistoryService {
   private key = 'shortcuts';
   private maxShortcuts = 100;
   private services: Service[] = [];
-  constructor() {
-  }
+  constructor() {}
 
   public async load(): Promise<Service[]> {
     if (this.services.length > 0) {
@@ -29,6 +28,9 @@ export class HistoryService {
       this.services = services.map((service: Service) => {
         return this.cleanup(service);
       });
+
+      // Filter out auto detected shortcuts
+      this.services = this.services.filter((service) => { return service.hostname == undefined});
     }
     return this.services;
   }
@@ -82,7 +84,10 @@ export class HistoryService {
       Http.setDataSerializer('raw');
       const pth: string = (await Filesystem.getUri({ path: `${service.id}.jpg`, directory: Directory.Data })).uri;
       console.log(`fav.get ${url}/favicon.ico`);
-      Http.downloadFile(`${url}/favicon.ico`, {}, {},
+      Http.downloadFile(
+        `${url}/favicon.ico`,
+        {},
+        {},
         pth,
         (entry: any) => {
           resolve(entry.nativeURL);
@@ -92,7 +97,6 @@ export class HistoryService {
           reject(err);
         }
       );
-
     });
   }
 
@@ -100,29 +104,36 @@ export class HistoryService {
     return new Promise((resolve, reject) => {
       Http.setDataSerializer('raw');
       console.log(`pwa.get ${url}`);
-      Http.get(url, {}, {}, async (response: any) => {
-        const appleIconUrl = this.findInHTML(response.data);
-        if (!appleIconUrl) {
-          reject('apple icon not found');
-          return;
-        }
-        const fullUrl = this.joinUrl(url, appleIconUrl);
-        console.log('Download', fullUrl);
-
-        let ext = '.jpg';
-        if (fullUrl.toLowerCase().endsWith('.png')) ext = '.png';
-        const pth: string = (await Filesystem.getUri({ path: `${service.id}${ext}`, directory: Directory.Data })).uri;
-        Http.downloadFile(fullUrl, {}, {},
-          pth,
-          (entry: any) => {
-            resolve(entry.nativeURL);
-          },
-          (err: any) => {
-            console.error(err);
-            reject(err);
+      Http.get(
+        url,
+        {},
+        {},
+        async (response: any) => {
+          const appleIconUrl = this.findInHTML(response.data);
+          if (!appleIconUrl) {
+            reject('apple icon not found');
+            return;
           }
-        );
-      },
+          const fullUrl = this.joinUrl(url, appleIconUrl);
+          console.log('Download', fullUrl);
+
+          let ext = '.jpg';
+          if (fullUrl.toLowerCase().endsWith('.png')) ext = '.png';
+          const pth: string = (await Filesystem.getUri({ path: `${service.id}${ext}`, directory: Directory.Data })).uri;
+          Http.downloadFile(
+            fullUrl,
+            {},
+            {},
+            pth,
+            (entry: any) => {
+              resolve(entry.nativeURL);
+            },
+            (err: any) => {
+              console.error(err);
+              reject(err);
+            }
+          );
+        },
         (err: any) => {
           console.error(err);
           reject(err);
@@ -169,11 +180,9 @@ export class HistoryService {
       }
     } catch (err) {
       console.warn(`Failed to parse html`, err);
-
     }
     return undefined;
   }
-
 
   private unique(): string {
     let id: string;
@@ -237,7 +246,7 @@ export class HistoryService {
 
   private extractName(url: string): string {
     try {
-      let name = url.toLowerCase().replace('http://', '').replace('https://', '');
+      let name = url.toLowerCase().replace('http://', '').replace('https://', '').replace('www.','');
       name = name.charAt(0).toUpperCase() + name.slice(1);
       if (name.endsWith('.com')) {
         name = name.substring(0, name.length - 4);
@@ -249,12 +258,15 @@ export class HistoryService {
   }
 
   public isValidUrl(url: string): boolean {
-    var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // validate query string
-      '(\\#[-a-z\\d_]*)?$', 'i'); // validate fragment locator
+    var urlPattern = new RegExp(
+      '^(https?:\\/\\/)?' + // validate protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // validate query string
+        '(\\#[-a-z\\d_]*)?$',
+      'i'
+    ); // validate fragment locator
     return !!urlPattern.test(url);
   }
 

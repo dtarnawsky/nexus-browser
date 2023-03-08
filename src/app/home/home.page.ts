@@ -25,6 +25,7 @@ interface HomeModel {
   busy?: boolean;
   hideTutorial?: boolean;
   hideHistory?: boolean;
+  isNative: boolean;
   services: Service[];
 }
 
@@ -36,10 +37,10 @@ interface HomeModel {
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
   public vm: HomeModel = {
     url: '',
-    services: []
+    isNative: Capacitor.isNativePlatform(),
+    services: [],
   };
 
   constructor(
@@ -55,6 +56,7 @@ export class HomePage implements OnInit {
   ) { }
 
   async ngOnInit() {
+    await this.urlService.setRemoteURL(undefined);
     await this.load();
 
     if (!Capacitor.isNativePlatform()) {
@@ -87,8 +89,10 @@ export class HomePage implements OnInit {
     await StatusBar.setStyle({ style: Style.Dark });
     await SplashScreen.hide();
 
-    IonicDiscover.start(); // Note: we cannot await    
-    setInterval(async () => { this.discover() }, 2000);
+    IonicDiscover.start(); // Note: we cannot await
+    setInterval(async () => {
+      this.discover();
+    }, 2000);
 
     this.checkDeepLink();
   }
@@ -125,7 +129,7 @@ export class HomePage implements OnInit {
    */
   public async connect(url: string, save?: boolean) {
     const fullUrl = this.historyService.toFullUrl(url);
-
+    this.urlService.setRemoteURL(fullUrl);
     if (!this.historyService.isValidUrl(fullUrl)) {
       await this.ui.alert(this.alert, 'Enter a valid url');
       this.ui.focus('devServerUrl');
@@ -143,7 +147,7 @@ export class HomePage implements OnInit {
         break;
       }
       case ShortcutAction.click: {
-        // IonicDiscover.stop();                
+        // IonicDiscover.stop();
         const url = `${service.address}${service.port ? ':' + service.port : ''}`;
         const save = !service.hostname;
         await this.visit(this.historyService.toFullUrl(url), save);
@@ -152,6 +156,8 @@ export class HomePage implements OnInit {
     }
   }
 
+
+
   public async clearHistory() {
     this.vm.services = await this.historyService.clear();
   }
@@ -159,8 +165,12 @@ export class HomePage implements OnInit {
   public async settings() {
     const action = await this.settingsService.presentSettings(this.actionSheetCtrl);
     switch (action) {
-      case Role.destructive: this.clearHistory(); break;
-      case Role.privacy: this.router.navigateByUrl('/privacy'); break;
+      case Role.destructive:
+        this.clearHistory();
+        break;
+      case Role.privacy:
+        this.router.navigateByUrl('/privacy');
+        break;
     }
   }
 
@@ -170,7 +180,7 @@ export class HomePage implements OnInit {
       this.vm.busy = true;
       const result = await this.scanService.scan();
       if (result.text) {
-        await this.connect(result.text);
+        await this.connect(result.text, false);
       }
     } catch (err) {
       this.ui.alert(this.alert, err as string);
@@ -182,6 +192,7 @@ export class HomePage implements OnInit {
   private async visit(url: string, save: boolean) {
     try {
       this.vm.busy = true;
+      await this.urlService.setRemoteURL(url);
       const error = await this.urlService.visit(url, save);
       await this.load();
       if (error) {
@@ -211,5 +222,4 @@ export class HomePage implements OnInit {
       this.open(ShortcutAction.click, service);
     }
   }
-
 }

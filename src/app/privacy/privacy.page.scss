@@ -9,3 +9,9 @@
 p {
     margin-bottom: 30px;
 }
+
+a {
+    cursor: pointer;
+    color: var(--ion-color-primary-contrast);
+    text-decoration: none;
+}

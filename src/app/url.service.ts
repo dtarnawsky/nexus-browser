@@ -5,16 +5,16 @@ import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 import { InAppBrowser } from './cordova-plugins';
 import { HistoryService } from './history.service';
 import { delay } from './util.service';
+import { Preferences } from '@capacitor/preferences';
+import { Device } from '@capacitor/device';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UrlService {
-
   private slug: string | undefined;
 
-  constructor(private historyService: HistoryService) {
-  }
+  constructor(private historyService: HistoryService) { }
 
   public async visit(url: string, save: boolean): Promise<string | undefined> {
     if (Capacitor.isNativePlatform()) {
@@ -69,8 +69,43 @@ export class UrlService {
     }
   }
 
+  // Set the remote logging URL Capacitor will report to
+  public async setRemoteURL(url: string | undefined) {
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+    if (!url) {
+      await Preferences.remove({ key: 'RemoteLoggingURL' });
+      return;
+    }
+    const domain = this.getDomain(url);
+    if (!domain) return; // This ensure we only get through if we're using an address and port
+    
+    const info = await Device.getInfo();
+    await Preferences.set({
+      key: 'RemoteLoggingURL',
+      value: `http://${domain}:8942`,
+    });
+
+    console.log(`Connected from ${info.manufacturer} ${info.name} version ${info.osVersion}`);
+  }
+
+  private getDomain(url: string): string | undefined {
+    let domain = url.toLowerCase().replace('http://', '').replace('https://', '');
+    if (domain.includes(':')) {
+      const tmp = domain.split(':');
+      domain = tmp[0];
+    }
+    if (domain.includes('/')) {
+      return;
+    }
+    return domain;
+  }
+
   private isIp(val: string): boolean {
-    return (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(val));
+    return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
+      val
+    );
   }
 
   private async testUrl(url: string): Promise<string | undefined> {
@@ -84,6 +119,7 @@ export class UrlService {
         } else {
           const launchInternal = this.isHttp(url) || this.allowed(url);
           if (!launchInternal) {
+            console.log(`Call get ${url}`)
             const response: HttpResponse = await CapacitorHttp.get({ url });
             if (response.status !== 200) {
               return `${url} responded with the status code ${response.status}`;
@@ -104,18 +140,17 @@ export class UrlService {
         console.error(`Unable to verify ${url}`, error);
         const message = (error as any).message;
 
-        if ((message == 'The Internet connection appears to be offline.') && !hasRetried) {
-          // First installation shows a prompt to access local network. So we retry after that          
+        if (message == 'The Internet connection appears to be offline.' && !hasRetried) {
+          // First installation shows a prompt to access local network. So we retry after that
           retry = true;
           hasRetried = true;
           await delay(2500);
         } else {
           await this.historyService.remove(url);
-          return message;
+          return url + ': '+message;
         }
       }
-    }
-    while (retry);
+    } while (retry);
     return;
   }
 

@@ -6,12 +6,11 @@ const config: CapacitorConfig = {
   appName: 'capview',
   webDir: 'www',
   bundledWebRuntime: false,
-  backgroundColor: '#333333',
-  loggingBehavior: 'none',
+  backgroundColor: '#333333',  
   server: {
     allowNavigation: ['*'],
     cleartext: true,
-    errorPath: 'error.html'
+    errorPath: 'error.html',
   },
   android: {
     allowMixedContent: true,
@@ -19,22 +18,22 @@ const config: CapacitorConfig = {
     buildOptions: {
       keystorePath: '/Volumes/CodeDrive/Code/nexus-browser-1/keys/AndroidKeys',
       keystoreAlias: 'key0',
-    }
+    },
   },
   plugins: {
     SplashScreen: {
       backgroundColor: '#333333',
       splashFullScreen: true,
       splashImmersive: false,
-      launchAutoHide: false
+      launchAutoHide: false,
     },
     Keyboard: {
       style: KeyboardStyle.Dark,
     },
     CapacitorHttp: {
-      enabled: false
-    }
-  }
+      enabled: false,
+    },
+  },
 };
 
 export default config;

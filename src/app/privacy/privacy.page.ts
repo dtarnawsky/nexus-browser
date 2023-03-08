@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-privacy',
@@ -6,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./privacy.page.scss'],
 })
 export class PrivacyPage {
+  isNative: boolean = Capacitor.isNativePlatform();
 
-  constructor() { }
-
-
+  constructor() {}
 }

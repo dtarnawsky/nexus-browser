@@ -71,5 +71,5 @@ resources/ios/**/*
 resources/android/**/*
 # Local Netlify folder
 .netlify
-
+ios/App/output
 /keys

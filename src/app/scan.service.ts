@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { BarcodeScanner, ScanPreferences, ScanResult } from './cordova-plugins';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScanService {
-
-  constructor() { }
+  constructor() {}
 
   public scan(): Promise<ScanResult> {
-    const preferences: ScanPreferences =
-    {
+    const preferences: ScanPreferences = {
       preferFrontCamera: false, // iOS and Android
       showFlipCameraButton: false, // iOS and Android
       showTorchButton: false, // iOS and Android
@@ -21,14 +19,19 @@ export class ScanService {
       formats: 'QR_CODE,PDF_417', // default: all but PDF_417 and RSS_EXPANDED
       orientation: 'portrait', // Android only (portrait|landscape), default unset so it rotates with the device
       disableAnimations: true, // iOS
-      disableSuccessBeep: true // iOS and Android
+      disableSuccessBeep: true, // iOS and Android
     };
 
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       BarcodeScanner.scan(
-        (result: ScanResult) => { resolve(result); },
-        (error: string) => { reject(error); },
-        preferences);
-    });   
+        (result: ScanResult) => {
+          resolve(result);
+        },
+        (error: string) => {
+          reject(error);
+        },
+        preferences
+      );
+    });
   }
 }

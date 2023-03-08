@@ -4,17 +4,24 @@
   "author": "Nexus Concepts",
   "homepage": "https://nexusconcepts.com/",
   "scripts": {
+    "prepare": "husky install",
     "ng": "ng",
     "start": "ng serve",
     "build": "npm run packages && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "capacitor:sync:after": "cp patch/CAPLog.swift 'node_modules/@capacitor/ios/Capacitor/Capacitor/CAPLog.swift'",
+    "lint-fix": "eslint . --ext .ts --fix && prettier \"**/*.ts\" --write",
     "deploy": "npm run build && netlify deploy --prod",
     "packages": "npm run build-packages || npm run write-packages",
     "build-packages": "npx tsc ./scripts/list-plugins.ts > /dev/null",
     "write-packages": "node ./scripts/list-plugins.js",
     "assets": "npx capacitor-assets generate --iconBackgroundColor '#333333' --iconBackgroundColorDark '#333333' --splashBackgroundColor '#333333' --splashBackgroundColorDark '#333333'"
+  },
+  "prettier": "@ionic/prettier-config",
+  "eslintConfig": {
+    "extends": "@ionic/eslint-config/recommended"
   },
   "private": true,
   "dependencies": {
@@ -78,6 +85,8 @@
     "@angular/language-service": "^15.2.0",
     "@capacitor/cli": "4.7.0",
     "@ionic/angular-toolkit": "8.0.0",
+    "@ionic/eslint-config": "^0.3.0",
+    "@ionic/prettier-config": "^2.0.0",
     "@types/jasmine": "4.3.1",
     "@types/node": "18.14.4",
     "@typescript-eslint/eslint-plugin": "5.54.0",
@@ -86,6 +95,7 @@
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsdoc": "40.0.1",
     "eslint-plugin-prefer-arrow": "1.2.3",
+    "husky": "8.0.3",
     "jasmine-core": "4.5.0",
     "jasmine-spec-reporter": "7.0.0",
     "karma": "~6.4.0",
