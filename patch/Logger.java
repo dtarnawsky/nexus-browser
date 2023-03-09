@@ -134,7 +134,7 @@ public class Logger {
     }
 
   public static void sendPost(String tag, String message, String type) {
-    if (remoteLoggingUrl == "") {
+    if (remoteLoggingUrl == "" || remoteLoggingUrl == "/log") {
        return;
     }
     try {
@@ -163,7 +163,7 @@ public class Logger {
         queue.add(jsonParam.toString());
       }
     } catch (Exception e) {
-      Log.e(tag, "Failed to queue", e);
+      Log.e(tag, "Failed to sendPost to "+ remoteLoggingUrl, e);
     }
   }
 
@@ -171,8 +171,8 @@ public class Logger {
     Thread thread = new Thread(new Runnable() {
       @Override
       public void run() {
-        try {
-          while (true) {
+        while (true) {
+          try {
             if (!queue.isEmpty()) {
               JSONArray jsonArray = new JSONArray();
               String tmp = "[";
@@ -185,26 +185,30 @@ public class Logger {
               }
               tmp = tmp + "]";
 
-              URL url = new URL(remoteLoggingUrl);
-              HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-              conn.setRequestMethod("POST");
-              conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-              conn.setRequestProperty("Accept", "application/json");
-              conn.setDoOutput(true);
-              conn.setDoInput(true);
+              if (remoteLoggingUrl.startsWith("http")) {
+                URL url = new URL(remoteLoggingUrl);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
 
-              DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-              os.writeBytes(tmp);
+                DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                os.writeBytes(tmp);
 
-              os.flush();
-              os.close();
-              Log.v("Capacitor/RemoteLog", remoteLoggingUrl +" " +String.valueOf(conn.getResponseCode()));
-              conn.disconnect();
+                os.flush();
+                os.close();
+                Log.v("Capacitor/RemoteLog", remoteLoggingUrl + " " + String.valueOf(conn.getResponseCode()));
+                conn.disconnect();
+              } else {
+                Log.v("Capacitor/RemoteLog", "Skipped sending log because it remote logging url is " +remoteLoggingUrl );
+              }
             }
             Thread.sleep(1000);
+          } catch (Exception e) {
+            Log.e("Capacitor/RemoteLog", "Failed to send to " + remoteLoggingUrl, e);
           }
-        } catch (Exception e) {
-          Log.e("Capacitor/RemoteLog", "Failed to send to "+remoteLoggingUrl, e);
         }
       }
     });
