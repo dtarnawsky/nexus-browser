@@ -1,6 +1,6 @@
 <ion-content color="dark" [fullscreen]="true">
   <ion-fab class="safe-top" slot="fixed" horizontal="end" vertical="start">
-    <ion-fab-button (click)="settings()">
+    <ion-fab-button aria-label="settings" (click)="settings()">
       <ion-icon name="ellipsis-horizontal"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -9,20 +9,24 @@
       <ion-spinner name="crescent" />
     </div>
 
-    <picture>
+    <picture aria-hidden="true">
       <img class="logo animate__animated animate__fadeInDown" src="assets/logo-nexus.svg" />
     </picture>
 
     <form class="animate__animated animate__zoomIn" [hidden]="vm.busy" (submit)="connect(vm.url)">
-      <input enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
+      <input aria-label="URL" enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
         [(ngModel)]="vm.url" type="url" />
-      <ion-icon *ngIf="vm.isNative" class="qr" name="qr-code-sharp" (click)="scan()"></ion-icon>
+      <button class="qr" (click)="scan()">
+        <ion-icon role="button" aria-label="Scan a QR Code for a URL" *ngIf="vm.isNative" 
+          name="qr-code-sharp"></ion-icon>
+      </button>
     </form>
 
     <div class="ion-padding"></div>
     <div class="ion-padding"></div>
     <div *ngIf="!vm.busy" class="shortcut-container">
-      <app-shortcut *ngFor="let service of vm.services" (clicked)="open($event, service)" [service]="service"></app-shortcut>
+      <app-shortcut *ngFor="let service of vm.services" (clicked)="open($event, service)"
+        [service]="service"></app-shortcut>
     </div>
   </div>
 
@@ -30,7 +34,7 @@
 
 </ion-content>
 <!-- <ion-footer class="ion-no-border"> -->
-  <!-- <app-slides [hidden]="vm.busy || vm.hideHistory || vm.urls.length > 0 || vm.hideTutorial">
+<!-- <app-slides [hidden]="vm.busy || vm.hideHistory || vm.urls.length > 0 || vm.hideTutorial">
     <app-slide>
       <div class="card">
         <h4>Tutorial</h4>
@@ -55,7 +59,7 @@
     </app-slide>
   </app-slides> -->
 
-  <!-- <div [hidden]="vm.busy || vm.hideHistory || vm.urls.length === 0">
+<!-- <div [hidden]="vm.busy || vm.hideHistory || vm.urls.length === 0">
     <p class="history line" *ngFor="let url of vm.urls" (click)="go(url)">{{url}}</p>
     <p class="history" (click)="clearHistory()">Clear History</p>
   </div> -->

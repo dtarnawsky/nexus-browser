@@ -2,11 +2,7 @@
 
 ## Features
 
-- Use large colored Capacitor icon
 - Try the input down the bottom and have it work a little more like safari
-- Show app version
-- Show plugin drift message (there are X plugins that may not function with your app [more info | continue ])
-- Fix accessibility
 - Pop sound and animation on seeing an app appear (but only if >30 seconds after launched app)
 - Add a "Share" link (eg for developers to share a link to the app - generate `https://nexusbrowser.com/[ip:port]` for Capacitor links)
 - Clear history should clear local-storage, cookies, index-db, preferences

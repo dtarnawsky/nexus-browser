@@ -12,6 +12,7 @@ const config: CapacitorConfig = {
     cleartext: true,
     errorPath: 'error.html',
   },
+  loggingBehavior: 'production',
   android: {
     allowMixedContent: true,
     backgroundColor: '#333333',
