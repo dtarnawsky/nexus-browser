@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "capacitor:sync:after": "cp patch/CAPLog.swift 'node_modules/@capacitor/ios/Capacitor/Capacitor/CAPLog.swift'",
+    "capacitor:sync:after": "cp patch/CAPLog.swift 'node_modules/@capacitor/ios/Capacitor/Capacitor/CAPLog.swift' && cp patch/Logger.java 'node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/Logger.java'",
     "lint-fix": "eslint . --ext .ts --fix && prettier \"**/*.ts\" --write",
     "deploy": "npm run build && netlify deploy --prod",
     "packages": "npm run build-packages || npm run write-packages",

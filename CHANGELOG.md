@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4
+- Accessibility fixes
+- Remoting Logging added for iOS and Android
+
 ## 1.3
 - Hide QR option on web
 - Fix removal of old detected shortcuts

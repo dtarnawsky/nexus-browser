@@ -1,9 +1,9 @@
 <div class="container animate__animated animate__fadeIn">
-    <button (click)="click()" class="icon-button">
+    <button (click)="click()" class="icon-button" [attr.aria-label]="service.name">
     <!-- <ion-icon *ngIf="!service.icon" size="large" [name]="service.port ? 'logo-capacitor' : 'document-text-outline'"></ion-icon> -->
     <ion-icon *ngIf="!service.icon && !service.port" size="large" name="document-text-outline"></ion-icon>
     <img *ngIf="!service.icon && service.port" src="assets/cap-icon.svg" />
     <img draggable="false" *ngIf="service.icon" class="icon" [src]="safeUrl(service.icon)" (error)="service.icon = undefined" />
   </button>
-  <ion-label (click)="press()">{{service.name}}</ion-label>
+  <ion-label aria-hidden="true" (click)="press()">{{service.name}}</ion-label>
 </div>

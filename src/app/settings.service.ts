@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { Service } from './discovery';
 import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 
 export enum Role {
   destructive = 'destructive',
@@ -14,13 +15,17 @@ export enum Role {
   providedIn: 'root',
 })
 export class SettingsService {
-  constructor() {}
+  constructor() { }
 
   public async presentSettings(ctrl: ActionSheetController): Promise<Role> {
-    const info = await App.getInfo();
+    let subHeader = undefined;
+    if (Capacitor.isNativePlatform()) {
+      const info = await App.getInfo();
+      subHeader = `v${info.version}.${info.build}`;
+    }
     const actionSheet = await ctrl.create({
       header: 'Settings',
-      subHeader: `v${info.version}.${info.build}`,
+      subHeader,
       buttons: [
         { text: 'Privacy Policy', role: Role.privacy },
         {

@@ -82,6 +82,10 @@ export class UrlService {
     if (!domain) return; // This ensure we only get through if we're using an address and port
     
     const info = await Device.getInfo();
+    
+    // This triggers remote logging to use this url
+    console.log(`[#RemoteLoggingURL=http://${domain}:8942]`);
+
     await Preferences.set({
       key: 'RemoteLoggingURL',
       value: `http://${domain}:8942`,
