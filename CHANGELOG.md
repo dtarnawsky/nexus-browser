@@ -2,7 +2,7 @@
 
 ## 1.4
 - Accessibility fixes
-- Remoting Logging added for iOS and Android
+- Remote Logging added for iOS and Android
 
 ## 1.3
 - Hide QR option on web
