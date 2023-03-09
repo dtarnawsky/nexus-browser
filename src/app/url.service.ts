@@ -75,7 +75,7 @@ export class UrlService {
       return;
     }
     if (!url) {
-      await Preferences.remove({ key: 'RemoteLoggingURL' });
+      console.log(`[#RemoteLoggingURL=]`);
       return;
     }
     const domain = this.getDomain(url);
@@ -85,11 +85,6 @@ export class UrlService {
     
     // This triggers remote logging to use this url
     console.log(`[#RemoteLoggingURL=http://${domain}:8942]`);
-
-    await Preferences.set({
-      key: 'RemoteLoggingURL',
-      value: `http://${domain}:8942`,
-    });
 
     console.log(`Connected from ${info.manufacturer} ${info.name} version ${info.osVersion}`);
   }
