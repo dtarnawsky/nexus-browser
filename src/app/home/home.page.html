@@ -14,7 +14,7 @@
     </picture>
 
     <form class="animate__animated animate__zoomIn" [hidden]="vm.busy" (submit)="connect(vm.url)">
-      <input aria-label="URL" enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
+      <input (keydown.enter)="handleKeyEnter($event)" aria-label="URL" enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
         [(ngModel)]="vm.url" type="url" />
       <button class="qr" (click)="scan()">
         <ion-icon role="button" aria-label="Scan a QR Code for a URL" *ngIf="vm.isNative" 

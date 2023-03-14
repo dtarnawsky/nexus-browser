@@ -27,6 +27,8 @@ interface HomeModel {
   hideHistory?: boolean;
   isNative: boolean;
   services: Service[];
+  scanDisabled: boolean;
+  connectDisabled: boolean;
 }
 
 @Component({
@@ -41,6 +43,8 @@ export class HomePage implements OnInit {
     url: '',
     isNative: Capacitor.isNativePlatform(),
     services: [],
+    scanDisabled: false,
+    connectDisabled: false
   };
 
   constructor(
@@ -128,6 +132,10 @@ export class HomePage implements OnInit {
    * @param {boolean} save Whether to save as a shortcut
    */
   public async connect(url: string, save?: boolean) {
+    if (this.vm.connectDisabled) {
+      this.vm.connectDisabled = false;
+      return;
+    }
     const fullUrl = this.historyService.toFullUrl(url);
     this.urlService.setRemoteURL(fullUrl);
     if (!this.historyService.isValidUrl(fullUrl)) {
@@ -174,7 +182,16 @@ export class HomePage implements OnInit {
     }
   }
 
+  public handleKeyEnter(event: any) {
+    this.vm.scanDisabled = true;    
+  }
+
   public async scan() {
+    if (this.vm.scanDisabled) {
+      this.vm.scanDisabled = false;
+      return;
+    }
+    this.vm.connectDisabled = true;
     if (!Capacitor.isNativePlatform()) return;
     try {
       this.vm.busy = true;

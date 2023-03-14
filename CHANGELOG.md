@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5
+
+- Fix remote logging for Android
+- Fix launch of scan on new site
+
 ## 1.4
 - Accessibility fixes
 - Remote Logging added for iOS and Android
