@@ -80,9 +80,9 @@ export class UrlService {
     }
     const domain = this.getDomain(url);
     if (!domain) return; // This ensure we only get through if we're using an address and port
-    
+
     const info = await Device.getInfo();
-    
+
     // This triggers remote logging to use this url
     console.log(`[#RemoteLoggingURL=http://${domain}:8942]`);
 
@@ -117,6 +117,7 @@ export class UrlService {
           window.open(url);
         } else {
           const launchInternal = this.isHttp(url) || this.allowed(url);
+          console.log(`testUrl called for ${url} (internal=${launchInternal})`)
           if (!launchInternal) {
             console.log(`Call get ${url}`)
             const response: HttpResponse = await CapacitorHttp.get({ url });
@@ -146,7 +147,7 @@ export class UrlService {
           await delay(2500);
         } else {
           await this.historyService.remove(url);
-          return url + ': '+message;
+          return url + ': ' + message;
         }
       }
     } while (retry);
@@ -156,6 +157,11 @@ export class UrlService {
   // Return if this site can be viewed in the app (true)
   // or will launch a browser window
   private allowed(url: string): boolean {
+    if (!url) return false;
+    const uri = new URL(url);
+    if (uri.port !== '80' && uri.port !== '443') {
+      return true;
+    }
     return url?.includes('.appflowapp.com');
   }
 

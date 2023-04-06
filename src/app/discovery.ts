@@ -5,5 +5,6 @@ export interface Service {
   address: string;
   port?: number;
   name: string;
+  secure: boolean;
   icon?: string; // Url to an icon
 }

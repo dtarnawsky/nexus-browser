@@ -200,7 +200,7 @@ export class HistoryService {
     return await this.load();
   }
 
-  public toFullUrl(url: string): string {
+  public toFullUrl(url: string, secure?: boolean): string {
     if (!url) {
       return '';
     }
@@ -214,10 +214,10 @@ export class HistoryService {
     }
     if (!url.startsWith('http')) {
       if (url.match(/^\d/)) {
-        // Assume http for ip addresses
-        url = 'http://' + url;
+        // Its an IP address
+        url = secure ? `https://${url}` : `http://${url}`;
       } else {
-        url = 'https://' + url;
+        url = `https://${url}`;
       }
     }
     if (!url.includes('.')) {
@@ -241,7 +241,7 @@ export class HistoryService {
   }
 
   private newService(url: string): Service {
-    return this.cleanup({ address: url, name: this.extractName(url) });
+    return this.cleanup({ address: url, name: this.extractName(url), secure: url?.startsWith('https') });
   }
 
   private extractName(url: string): string {
