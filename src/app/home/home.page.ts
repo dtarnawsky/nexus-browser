@@ -158,7 +158,7 @@ export class HomePage implements OnInit {
         // IonicDiscover.stop();
         const url = `${service.address}${service.port ? ':' + service.port : ''}`;
         const save = !service.hostname;
-        await this.visit(this.historyService.toFullUrl(url), save);
+        await this.visit(this.historyService.toFullUrl(url, service.secure), save);
         break;
       }
     }

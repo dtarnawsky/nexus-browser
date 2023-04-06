@@ -17,7 +17,7 @@ export enum ShortcutAction {
   styleUrls: ['./shortcut.component.scss'],
 })
 export class ShortcutComponent {
-  @Input() service: Service = { address: 'localhost', name: 'domain' };
+  @Input() service: Service = { address: 'localhost', name: 'domain', secure: false };
   @Output() clicked = new EventEmitter<ShortcutAction>();
   constructor(private sanitizer: DomSanitizer) {}
 

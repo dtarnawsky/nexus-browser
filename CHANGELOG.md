@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6
+
+- Support for https (with self signed certs)
+- Add @capacitor/action-sheet
+- Update Capacitor 4.7.0 to 4.7.3
+
 ## 1.5
 
 - Fix remote logging for Android
