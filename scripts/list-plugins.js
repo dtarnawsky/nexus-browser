@@ -91,8 +91,16 @@ function list() {
                         if (pkg.startsWith('animate.css'))
                             plugin = false;
                         if ([
-                            'zone.js', 'typescript', 'tslib', 'rxjs', 'ionicons', '@capacitor/cli',
-                            '@capacitor/assets', '@capacitor/android', '@capacitor/ios', '@capacitor/core'
+                            'zone.js',
+                            'typescript',
+                            'tslib',
+                            'rxjs',
+                            'ionicons',
+                            '@capacitor/cli',
+                            '@capacitor/assets',
+                            '@capacitor/android',
+                            '@capacitor/ios',
+                            '@capacitor/core',
                         ].includes(pkg))
                             plugin = false;
                         if (plugin) {

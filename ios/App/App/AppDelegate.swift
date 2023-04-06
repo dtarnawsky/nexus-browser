@@ -8,13 +8,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // This allows the web view to be inspectable
-        if #available(macOS 13.3, iOS 16.4, tvOS 16.4, *) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                      if let vc = self.window?.rootViewController as? CAPBridgeViewController {
-                          vc.bridge?.webView?.isInspectable = true;
-                      }
-                }
-        }
+//        if #available(macOS 13.3, iOS 16.4, tvOS 16.4, *) {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//                      if let vc = self.window?.rootViewController as? CAPBridgeViewController {
+//                          vc.bridge?.webView?.isInspectable = true;
+//                      }
+//                }
+//        }
         return true
     }
 

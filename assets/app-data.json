@@ -9,6 +9,10 @@
       "version": "3.0.0"
     },
     {
+      "name": "@capacitor/action-sheet",
+      "version": "4.1.0"
+    },
+    {
       "name": "@capacitor/app",
       "version": "4.1.1"
     },
@@ -61,6 +65,10 @@
       "version": "4.0.2"
     },
     {
+      "name": "@capacitor/screen-orientation",
+      "version": "4.1.0"
+    },
+    {
       "name": "@capacitor/screen-reader",
       "version": "4.1.2"
     },
@@ -97,6 +105,10 @@
       "version": "3.0.0"
     },
     {
+      "name": "@jcesarmobile/ssl-skip",
+      "version": "0.2.0"
+    },
+    {
       "name": "@sentry/capacitor",
       "version": "0.11.2"
     },
@@ -115,6 +127,10 @@
     {
       "name": "cordova-plugin-inappbrowser",
       "version": "5.0.0"
+    },
+    {
+      "name": "husky",
+      "version": "8.0.3"
     },
     {
       "name": "phonegap-plugin-barcodescanner",

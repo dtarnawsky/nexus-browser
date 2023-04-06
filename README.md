@@ -15,6 +15,7 @@ The following plugins are preinstalled
 <!--- Generated Plugins -->
  - **@capacitor-community/apple-sign-in** - 4.0.0
  - **@capacitor-community/keep-awake** - 3.0.0
+ - **@capacitor/action-sheet** - 4.1.0
  - **@capacitor/app** - 4.1.1
  - **@capacitor/browser** - 4.1.1
  - **@capacitor/camera** - 4.1.4
@@ -28,6 +29,7 @@ The following plugins are preinstalled
  - **@capacitor/motion** - 4.0.2
  - **@capacitor/network** - 4.1.0
  - **@capacitor/preferences** - 4.0.2
+ - **@capacitor/screen-orientation** - 4.1.0
  - **@capacitor/screen-reader** - 4.1.2
  - **@capacitor/share** - 4.1.1
  - **@capacitor/splash-screen** - 4.2.0
@@ -37,11 +39,13 @@ The following plugins are preinstalled
  - **@ionic-enterprise/auth** - 4.0.0
  - **@ionic-enterprise/identity-vault** - 5.9.6
  - **@ionic-enterprise/secure-storage** - 3.0.0
+ - **@jcesarmobile/ssl-skip** - 0.2.0
  - **@sentry/capacitor** - 0.11.2
  - **cordova-plugin-advanced-http** - 3.3.1
  - **cordova-plugin-discover** - 1.0.4
  - **cordova-plugin-file** - 7.0.0
  - **cordova-plugin-inappbrowser** - 5.0.0
+ - **husky** - 8.0.3
  - **phonegap-plugin-barcodescanner** - 9.0.0
 <!--- Generated Plugins End -->
 
@@ -52,6 +56,9 @@ Available in the [App Store](https://apps.apple.com/us/app/nexus-web-browser/id6
 ## Play Store
 
 Available in the [Play Store](https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus).
+
+
+
 
 
 
