@@ -41,6 +41,10 @@
       "version": "4.1.4"
     },
     {
+      "name": "@capacitor/geolocation",
+      "version": "4.1.0"
+    },
+    {
       "name": "@capacitor/haptics",
       "version": "4.1.0"
     },
@@ -105,10 +109,6 @@
       "version": "3.0.0"
     },
     {
-      "name": "@jcesarmobile/ssl-skip",
-      "version": "0.2.0"
-    },
-    {
       "name": "@sentry/capacitor",
       "version": "0.11.2"
     },
@@ -127,10 +127,6 @@
     {
       "name": "cordova-plugin-inappbrowser",
       "version": "5.0.0"
-    },
-    {
-      "name": "husky",
-      "version": "8.0.3"
     },
     {
       "name": "phonegap-plugin-barcodescanner",

@@ -23,6 +23,7 @@ The following plugins are preinstalled
  - **@capacitor/device** - 4.1.0
  - **@capacitor/dialog** - 4.1.0
  - **@capacitor/filesystem** - 4.1.4
+ - **@capacitor/geolocation** - 4.1.0
  - **@capacitor/haptics** - 4.1.0
  - **@capacitor/keyboard** - 4.1.1
  - **@capacitor/local-notifications** - 4.1.5
@@ -39,13 +40,11 @@ The following plugins are preinstalled
  - **@ionic-enterprise/auth** - 4.0.0
  - **@ionic-enterprise/identity-vault** - 5.9.6
  - **@ionic-enterprise/secure-storage** - 3.0.0
- - **@jcesarmobile/ssl-skip** - 0.2.0
  - **@sentry/capacitor** - 0.11.2
  - **cordova-plugin-advanced-http** - 3.3.1
  - **cordova-plugin-discover** - 1.0.4
  - **cordova-plugin-file** - 7.0.0
  - **cordova-plugin-inappbrowser** - 5.0.0
- - **husky** - 8.0.3
  - **phonegap-plugin-barcodescanner** - 9.0.0
 <!--- Generated Plugins End -->
 

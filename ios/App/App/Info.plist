@@ -27,10 +27,10 @@
 			</array>
 		</dict>
 	</array>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationCategoryType</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -39,6 +39,10 @@
 	<string>Used to Scan a QR Code to visit your development web server</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used to store data in Ionic Identity Vault</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To meet local regulations and laws</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To meet local regulations and laws</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to view, select photos in a development app</string>
 	<key>UILaunchStoryboardName</key>

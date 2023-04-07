@@ -95,6 +95,7 @@ function list() {
                             'typescript',
                             'tslib',
                             'rxjs',
+                            'husky',
                             'ionicons',
                             '@capacitor/cli',
                             '@capacitor/assets',
