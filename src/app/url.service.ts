@@ -158,11 +158,15 @@ export class UrlService {
   // or will launch a browser window
   private allowed(url: string): boolean {
     if (!url) return false;
-    const uri = new URL(url);
-    if (uri.port !== '80' && uri.port !== '443') {
-      return true;
+    try {
+      const uri = new URL(url);      
+      if (uri.port !== '80' && uri.port !== '443') {
+        return true;
+      }
+      return url?.includes('.appflowapp.com');
+    } finally {
+      return false;
     }
-    return url?.includes('.appflowapp.com');
   }
 
   private getIcon(url: string) {
