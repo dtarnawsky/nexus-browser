@@ -32,7 +32,6 @@ dependencies {
     implementation project(':capacitor-text-zoom')
     implementation project(':capacitor-toast')
     implementation project(':ionic-enterprise-auth')
-    implementation project(':jcesarmobile-ssl-skip')
     implementation project(':sentry-capacitor')
     implementation "net.zetetic:android-database-sqlcipher:4.5.2"
     implementation "androidx.sqlite:sqlite:2.0.1"

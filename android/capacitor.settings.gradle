@@ -71,8 +71,5 @@ project(':capacitor-toast').projectDir = new File('../node_modules/@capacitor/to
 include ':ionic-enterprise-auth'
 project(':ionic-enterprise-auth').projectDir = new File('../node_modules/@ionic-enterprise/auth/android')
 
-include ':jcesarmobile-ssl-skip'
-project(':jcesarmobile-ssl-skip').projectDir = new File('../node_modules/@jcesarmobile/ssl-skip/android')
-
 include ':sentry-capacitor'
 project(':sentry-capacitor').projectDir = new File('../node_modules/@sentry/capacitor/android')
