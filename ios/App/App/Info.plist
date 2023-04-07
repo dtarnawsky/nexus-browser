@@ -35,6 +35,8 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Used to detect devices like beacons emitting URLs</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to Scan a QR Code to visit your development web server</string>
 	<key>NSFaceIDUsageDescription</key>
