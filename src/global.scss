@@ -26,3 +26,8 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import "~animate.css/animate.min.css";
+
+body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+  }

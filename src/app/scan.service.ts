@@ -1,37 +1,47 @@
 import { Injectable } from '@angular/core';
-import { BarcodeScanner, ScanPreferences, ScanResult } from './cordova-plugins';
+import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScanService {
-  constructor() {}
+  constructor() { }
 
-  public scan(): Promise<ScanResult> {
-    const preferences: ScanPreferences = {
-      preferFrontCamera: false, // iOS and Android
-      showFlipCameraButton: false, // iOS and Android
-      showTorchButton: false, // iOS and Android
-      torchOn: false, // Android, launch with the flashlight switched on (if available)
-      saveHistory: false, // Android, save scan history (default false)
-      prompt: 'Place the QR Code inside the scan area', // Android
-      resultDisplayDuration: 0, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
-      formats: 'QR_CODE,PDF_417', // default: all but PDF_417 and RSS_EXPANDED
-      orientation: 'portrait', // Android only (portrait|landscape), default unset so it rotates with the device
-      disableAnimations: true, // iOS
-      disableSuccessBeep: true, // iOS and Android
-    };
+  public async scan(): Promise<string | undefined> {
+    try {
+      this.hide();
+      const status = await BarcodeScanner.checkPermission({ force: true });
+      if (!status.granted) return undefined;
+      if (status.denied) {
+        this.show();
+        alert('Camera access was denied. You can enabled it in settings.');
+        await BarcodeScanner.openAppSettings();
+        return;
+      }
+      const result = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] });
+      if (result.hasContent) {
+        this.show();
+        return result.content;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    this.show();
+    return undefined;
+  }
 
-    return new Promise((resolve, reject) => {
-      BarcodeScanner.scan(
-        (result: ScanResult) => {
-          resolve(result);
-        },
-        (error: string) => {
-          reject(error);
-        },
-        preferences
-      );
-    });
+  private hide() {
+    BarcodeScanner.hideBackground();
+    const e = document.querySelector('body');
+    if (e) {
+      e.style.display = 'none';
+    }
+  }
+
+  private show() {
+    const e = document.querySelector('body');
+    if (e) {
+      e.style.display = 'block';
+    }
   }
 }

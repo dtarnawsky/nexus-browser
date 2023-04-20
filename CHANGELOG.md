@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8
+ - Fix for QR Code scanning
+ - Add plugin @capacitor-community/barcode-scanner
+ - Add plugin @capacitor/google-maps
+ - Remove plugin phonegap-plugin-barcodescanner
+
 ## 1.6
 
 - Support for https (with self signed certs)
