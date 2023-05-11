@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.9
+ - Switch to standalone modules
+ - Minor updates to each plugin
+ 
 ## 1.8
  - Fix for QR Code scanning
  - Add plugin @capacitor-community/barcode-scanner
