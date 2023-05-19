@@ -183,7 +183,7 @@ export class HomePage implements OnInit {
   }
 
   public handleKeyEnter(event: any) {
-    this.vm.scanDisabled = true;    
+    this.vm.scanDisabled = true;
   }
 
   public async scan() {
@@ -194,6 +194,7 @@ export class HomePage implements OnInit {
     this.vm.connectDisabled = true;
     if (!Capacitor.isNativePlatform()) return;
     try {
+      await this.scanService.prepare();
       this.vm.busy = true;
       const result = await this.scanService.scan();
       if (result) {

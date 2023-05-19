@@ -7,17 +7,21 @@ import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-sc
 export class ScanService {
   constructor() { }
 
+  public async prepare(): Promise<void> {
+    let status = await BarcodeScanner.checkPermission({ force: false });
+    if (status.granted) return;
+    status = await BarcodeScanner.checkPermission({ force: true });
+    if (!status.granted) return undefined;
+    if (status.denied) {
+      this.show();
+      await BarcodeScanner.openAppSettings();
+      throw new Error('Camera access was denied. You can enabled it in settings.');
+    }
+  }
+
   public async scan(): Promise<string | undefined> {
     try {
       this.hide();
-      const status = await BarcodeScanner.checkPermission({ force: true });
-      if (!status.granted) return undefined;
-      if (status.denied) {
-        this.show();
-        alert('Camera access was denied. You can enabled it in settings.');
-        await BarcodeScanner.openAppSettings();
-        return;
-      }
       const result = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE] });
       if (result.hasContent) {
         this.show();
