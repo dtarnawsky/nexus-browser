@@ -14,7 +14,7 @@ import { Device } from '@capacitor/device';
 export class UrlService {
   private slug: string | undefined;
 
-  constructor(private historyService: HistoryService) { }
+  constructor(private historyService: HistoryService) {}
 
   public async visit(url: string, save: boolean): Promise<string | undefined> {
     if (Capacitor.isNativePlatform()) {
@@ -117,9 +117,9 @@ export class UrlService {
           window.open(url);
         } else {
           const launchInternal = this.isHttp(url) || this.allowed(url);
-          console.log(`testUrl called for ${url} (internal=${launchInternal})`)
+          console.log(`testUrl called for ${url} (internal=${launchInternal})`);
           if (!launchInternal) {
-            console.log(`Call get ${url}`)
+            console.log(`Call get ${url}`);
             const response: HttpResponse = await CapacitorHttp.get({ url });
             if (response.status !== 200) {
               return `${url} responded with the status code ${response.status}`;
@@ -159,11 +159,11 @@ export class UrlService {
   private allowed(url: string): boolean {
     if (!url) return false;
     try {
-      const uri = new URL(url);      
+      const uri = new URL(url);
       if (uri.port !== '80' && uri.port !== '443') {
         return true;
       }
-      return url?.includes('.appflowapp.com');
+      return url?.includes('.appflowapp.com') || url?.includes('ngrok.io');
     } finally {
       return false;
     }

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9
+ - Switch to standalone modules
+ - Update to Capacitor 5, Angular 16
+ - Add ngrok.io to allowed list
+ 
 ## 1.8
  - Fix for QR Code scanning
  - Add plugin @capacitor-community/barcode-scanner

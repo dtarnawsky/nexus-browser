@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FormsModule, IonicModule, QRCodeModule],
   selector: 'app-link',
   templateUrl: './capacitor.page.html',
   styleUrls: ['./capacitor.page.scss'],

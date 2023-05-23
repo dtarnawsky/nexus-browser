@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
     isNative: Capacitor.isNativePlatform(),
     services: [],
     scanDisabled: false,
-    connectDisabled: false
+    connectDisabled: false,
   };
 
   constructor(
@@ -57,7 +57,7 @@ export class HomePage implements OnInit {
     private urlService: UrlService,
     private actionSheetCtrl: ActionSheetController,
     private settingsService: SettingsService
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.urlService.setRemoteURL(undefined);
@@ -164,8 +164,6 @@ export class HomePage implements OnInit {
     }
   }
 
-
-
   public async clearHistory() {
     this.vm.services = await this.historyService.clear();
   }
@@ -183,7 +181,7 @@ export class HomePage implements OnInit {
   }
 
   public handleKeyEnter(event: any) {
-    this.vm.scanDisabled = true;    
+    this.vm.scanDisabled = true;
   }
 
   public async scan() {
@@ -194,6 +192,7 @@ export class HomePage implements OnInit {
     this.vm.connectDisabled = true;
     if (!Capacitor.isNativePlatform()) return;
     try {
+      await this.scanService.prepare();
       this.vm.busy = true;
       const result = await this.scanService.scan();
       if (result) {
