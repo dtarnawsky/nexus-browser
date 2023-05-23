@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace "com.nexusconcepts.nexus"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.nexusconcepts.nexus"

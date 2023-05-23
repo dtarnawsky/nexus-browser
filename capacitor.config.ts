@@ -5,8 +5,7 @@ const config: CapacitorConfig = {
   appId: 'ionic.capview',
   appName: 'capview',
   webDir: 'www',
-  bundledWebRuntime: false,
-  backgroundColor: '#333333',  
+  backgroundColor: '#333333',
   server: {
     allowNavigation: ['*'],
     cleartext: true,

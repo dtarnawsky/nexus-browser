@@ -1,9 +1,9 @@
-import {  Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
     path: 'home',
-    loadComponent: () => import('./home/home.page').then(c => c.HomePage),
+    loadComponent: () => import('./home/home.page').then((c) => c.HomePage),
   },
   {
     path: '',
@@ -12,11 +12,11 @@ export const routes: Routes = [
   },
   {
     path: 'privacy',
-    loadComponent: () => import('./privacy/privacy.page').then(c => c.PrivacyPage),
+    loadComponent: () => import('./privacy/privacy.page').then((c) => c.PrivacyPage),
   },
   {
     path: 'capacitor',
-    loadComponent: () => import('./capacitor/capacitor.page').then(c => c.CapacitorPage),
+    loadComponent: () => import('./capacitor/capacitor.page').then((c) => c.CapacitorPage),
   },
   {
     path: ':id',

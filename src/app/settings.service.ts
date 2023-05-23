@@ -15,7 +15,7 @@ export enum Role {
   providedIn: 'root',
 })
 export class SettingsService {
-  constructor() { }
+  constructor() {}
 
   public async presentSettings(ctrl: ActionSheetController): Promise<Role> {
     let subHeader = undefined;

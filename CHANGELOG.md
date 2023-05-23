@@ -2,7 +2,8 @@
 
 ## 1.9
  - Switch to standalone modules
- - Minor updates to each plugin
+ - Update to Capacitor 5, Angular 16
+ - Add ngrok.io to allowed list
  
 ## 1.8
  - Fix for QR Code scanning

@@ -5,7 +5,7 @@ import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-sc
   providedIn: 'root',
 })
 export class ScanService {
-  constructor() { }
+  constructor() {}
 
   public async prepare(): Promise<void> {
     let status = await BarcodeScanner.checkPermission({ force: false });
