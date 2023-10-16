@@ -105,12 +105,16 @@
       "version": "5.0.6"
     },
     {
+      "name": "@capawesome/capacitor-file-picker",
+      "version": "5.1.1"
+    },
+    {
       "name": "@ionic-enterprise/auth",
       "version": "5.0.10"
     },
     {
       "name": "@ionic-enterprise/identity-vault",
-      "version": "5.12.0"
+      "version": "5.12.1"
     },
     {
       "name": "@ionic-enterprise/secure-storage",

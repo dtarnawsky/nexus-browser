@@ -1,4 +1,6 @@
 # Changelog
+## 1.11
+- Update dependencies, switch to use Angular Standalone components
 
 ## 1.9
  - Switch to standalone modules

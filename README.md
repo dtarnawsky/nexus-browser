@@ -39,8 +39,9 @@ The following plugins are preinstalled
  - **@capacitor/status-bar** - 5.0.6
  - **@capacitor/text-zoom** - 5.0.6
  - **@capacitor/toast** - 5.0.6
+ - **@capawesome/capacitor-file-picker** - 5.1.1
  - **@ionic-enterprise/auth** - 5.0.10
- - **@ionic-enterprise/identity-vault** - 5.12.0
+ - **@ionic-enterprise/identity-vault** - 5.12.1
  - **@ionic-enterprise/secure-storage** - 3.0.2
  - **@sentry/capacitor** - 0.11.5
  - **cordova-plugin-advanced-http** - 3.3.1
@@ -56,6 +57,8 @@ Available in the [App Store](https://apps.apple.com/us/app/nexus-web-browser/id6
 ## Play Store
 
 Available in the [Play Store](https://play.google.com/store/apps/details?id=com.nexusconcepts.nexus).
+
+
 
 
 

@@ -34,6 +34,7 @@ dependencies {
     implementation project(':capacitor-status-bar')
     implementation project(':capacitor-text-zoom')
     implementation project(':capacitor-toast')
+    implementation project(':capawesome-capacitor-file-picker')
     implementation project(':ionic-enterprise-auth')
     implementation project(':sentry-capacitor')
     implementation "net.zetetic:android-database-sqlcipher:4.5.2"

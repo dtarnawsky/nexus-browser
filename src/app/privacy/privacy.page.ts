@@ -3,17 +3,21 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
-import { IonicModule } from '@ionic/angular';
+import { addIcons } from "ionicons";
+import { closeOutline } from "ionicons/icons";
+import { IonRouterLink, IonContent, IonFab, IonFabButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule],
-  selector: 'app-privacy',
-  templateUrl: './privacy.page.html',
-  styleUrls: ['./privacy.page.scss'],
+    standalone: true,
+    imports: [CommonModule, FormsModule, RouterModule, IonRouterLink, IonContent, IonFab, IonFabButton, IonIcon],
+    selector: 'app-privacy',
+    templateUrl: './privacy.page.html',
+    styleUrls: ['./privacy.page.scss'],
 })
 export class PrivacyPage {
-  isNative: boolean = Capacitor.isNativePlatform();
+    isNative: boolean = Capacitor.isNativePlatform();
 
-  constructor() {}
+    constructor() {
+        addIcons({ closeOutline });
+    }
 }
