@@ -13,6 +13,10 @@
       "version": "3.0.2"
     },
     {
+      "name": "@capacitor-community/camera-preview",
+      "version": "5.0.0"
+    },
+    {
       "name": "@capacitor-community/keep-awake",
       "version": "4.0.0"
     },
