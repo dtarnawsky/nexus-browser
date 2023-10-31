@@ -1,4 +1,7 @@
 # Changelog
+## 1.12
+- Add plugin @capacitor-community/camera-preview
+
 ## 1.11
 - Update dependencies, switch to use Angular Standalone components
 

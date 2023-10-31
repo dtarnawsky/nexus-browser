@@ -45,6 +45,8 @@
 	<string>To meet local regulations and laws</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To meet local regulations and laws</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Used when camera audio is captured</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Used to view, select photos in a development app</string>
 	<key>UILaunchStoryboardName</key>
