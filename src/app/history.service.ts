@@ -206,7 +206,9 @@ export class HistoryService {
     if (!url) {
       return '';
     }
-    url = url.toLowerCase().trim();
+    const u = new URL(url.trim());
+    url = url.replace(u.hostname, u.hostname.toLowerCase());
+    url = url.replace(u.protocol, u.protocol.toLowerCase());
     if (url.includes('nexusbrowser.com/')) {
       // Likely a deep link like: https://nexusbrowser.com/192.168.0.125%3A8101
       const part = url.split('nexusbrowser.com/');
