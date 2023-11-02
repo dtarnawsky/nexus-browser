@@ -1,4 +1,9 @@
 # Changelog
+## 1.13
+- Fix to urls that were being lowercased
+- Fix(android) to set UIRequiresFullScreen permission for @capacitor/screen-orientation plugin 
+- Fix(is) to set NSPhotoLibraryAddUsageDescription permission for @capacitor/camera plugin
+
 ## 1.12
 - Add plugin @capacitor-community/camera-preview
 
