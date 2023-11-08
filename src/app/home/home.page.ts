@@ -2,7 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard, KeyboardResize } from '@capacitor/keyboard';
 import { StatusBar, Style } from '@capacitor/status-bar';
-import { ActionSheetController, AlertController } from '@ionic/angular/standalone';
+import { ActionSheetController, AlertController, IonActionSheet, IonModal, IonRouterLink } from '@ionic/angular/standalone';
 import { HistoryService } from '../history.service';
 import { ScanService } from '../scan.service';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -17,10 +17,10 @@ import { ShortcutAction, ShortcutComponent } from '../shortcut/shortcut.componen
 import { Role, SettingsService } from '../settings.service';
 import { UIService } from '../ui.service';
 import { UrlService } from '../url.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { App } from '@capacitor/app';
 import { addIcons } from "ionicons";
-import { ellipsisHorizontal, qrCodeSharp } from "ionicons/icons";
+import { ellipsisHorizontal, qrCodeSharp, qrCode } from "ionicons/icons";
 import { IonContent, IonFab, IonFabButton, IonIcon, IonSpinner } from "@ionic/angular/standalone";
 
 interface HomeModel {
@@ -36,7 +36,9 @@ interface HomeModel {
 
 @Component({
     standalone: true,
-    imports: [SlidesComponent, ShortcutComponent, SlideComponent, CommonModule, FormsModule, IonContent, IonFab, IonFabButton, IonIcon, IonSpinner],
+    imports: [SlidesComponent, ShortcutComponent, SlideComponent, CommonModule, FormsModule, 
+        IonContent, IonFab, IonFabButton, IonIcon, IonSpinner, IonContent, IonFab, IonFabButton, 
+        IonIcon, IonSpinner, RouterLink, IonRouterLink, IonActionSheet, IonModal],
     selector: 'app-home',
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
@@ -61,7 +63,7 @@ export class HomePage implements OnInit {
         private actionSheetCtrl: ActionSheetController,
         private settingsService: SettingsService
     ) {
-        addIcons({ ellipsisHorizontal, qrCodeSharp });
+        addIcons({ ellipsisHorizontal, qrCodeSharp, qrCode });
     }
 
     async ngOnInit() {

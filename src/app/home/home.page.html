@@ -12,7 +12,6 @@
     <picture aria-hidden="true">
       <img class="logo animate__animated animate__fadeInDown" src="assets/logo-nexus.svg" />
     </picture>
-
     <form class="animate__animated animate__zoomIn" [hidden]="vm.busy" (submit)="connect(vm.url)">
       <input (keydown.enter)="handleKeyEnter($event)" aria-label="URL" enterkeyhint="go" id="devServerUrl" name="devServerUrl" placeholder="Type a URL (eg apple.com)"
         [(ngModel)]="vm.url" type="url" />
