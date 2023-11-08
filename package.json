@@ -65,7 +65,7 @@
     "@ionic-enterprise/auth": "5.0.10",
     "@ionic-enterprise/identity-vault": "5.12.1",
     "@ionic-enterprise/secure-storage": "3.0.2",
-    "@ionic/angular": "7.5.3",
+    "@ionic/angular": "7.5.0",
     "@ionic/remote-log": "0.0.2",
     "@sentry/capacitor": "0.11.5",
     "angularx-qrcode": "16.0.1",
