@@ -23,6 +23,7 @@ export class SettingsService {
             const info = await App.getInfo();
             subHeader = `v${info.version}.${info.build}`;
         }
+        console.log('create action sheet....')
         const actionSheet = await ctrl.create({
             header: 'Settings',
             subHeader,
@@ -44,7 +45,7 @@ export class SettingsService {
                 },
             ],
         });
-
+console.log('present')
         await actionSheet.present();
 
         const result = await actionSheet.onDidDismiss();
