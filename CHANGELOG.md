@@ -1,4 +1,9 @@
 # Changelog
+## 1.14
+- Fix missing icons
+- Fix allowed urls
+- Add READ_MEDIA_IMAGES permissions for Android
+
 ## 1.13
 - Fix to urls that were being lowercased
 - Fix(android) to set UIRequiresFullScreen permission for @capacitor/screen-orientation plugin 
