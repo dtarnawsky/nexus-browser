@@ -155,11 +155,14 @@ export class UrlService {
   }
 
   // Return if this site can be viewed in the app (true)
-  // or will launch a browser window
+  // or will launch a browser window (false)
   private allowed(url: string): boolean {
     if (!url) return false;
     try {
       const uri = new URL(url);
+      if (!this.isIp(uri.host)) {
+        return false;
+      }
       if (uri.port !== '80' && uri.port !== '443') {
         return true;
       }
