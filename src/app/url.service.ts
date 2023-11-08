@@ -164,7 +164,7 @@ export class UrlService {
         return true;
       }
       return url?.includes('.appflowapp.com') || url?.includes('ngrok.io');
-    } finally {
+    } catch(ignored) {
       return false;
     }
   }
