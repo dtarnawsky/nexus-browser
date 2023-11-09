@@ -1,4 +1,7 @@
 # Changelog
+## 1.15
+- Fix for AppFlow and ngrok
+
 ## 1.14
 - Fix missing icons
 - Fix allowed urls
