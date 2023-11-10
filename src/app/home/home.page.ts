@@ -122,13 +122,14 @@ export class HomePage implements OnInit {
         this.addServices(data?.services);
     }
 
-    private addServices(services: Service[]) {
+    private async addServices(services: Service[]) {
         if (!services || services.length == 0) return;
         for (const service of services) {
             const idx = this.vm.services.findIndex((found) => found.id == service.id);
             if (idx == -1) {
-                this.vm.services.push(service);
-                this.ui.keepAwake();
+                this.vm.services.push(service);                
+                await this.ui.keepAwake();                
+                this.open(ShortcutAction.click, service);
             }
         }
     }
