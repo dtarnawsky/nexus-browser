@@ -1,4 +1,8 @@
 # Changelog
+## 1.15
+- Fix for AppFlow and ngrok
+- Autostart on detecting a new app
+
 ## 1.14
 - Fix missing icons
 - Fix allowed urls

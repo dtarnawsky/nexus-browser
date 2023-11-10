@@ -160,13 +160,26 @@ export class UrlService {
     if (!url) return false;
     try {
       const uri = new URL(url);
-      if (!this.isIp(uri.host)) {
-        return false;
+      // AppFlow previews are ok
+      if (url.includes('.appflowapp.com')) {
+        return true;
       }
+
+      // Ngrok.io
+      if (url.includes('ngrok.io')) {
+        return true;
+      }
+
+      // Non standard ports
       if (uri.port !== '80' && uri.port !== '443') {
         return true;
       }
-      return url?.includes('.appflowapp.com') || url?.includes('ngrok.io');
+
+      // IP Addresses
+      if (this.isIp(uri.host)) {
+        return true;
+      }
+      return false;
     } catch {
       return false;
     }

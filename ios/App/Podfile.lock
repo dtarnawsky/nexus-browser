@@ -15,7 +15,7 @@ PODS:
     - Capacitor
   - CapacitorCommunityBarcodeScanner (4.0.1):
     - Capacitor
-  - CapacitorCommunityBluetoothLe (3.0.2):
+  - CapacitorCommunityBluetoothLe (3.1.1):
     - Capacitor
   - CapacitorCommunityCameraPreview (2.0.0):
     - Capacitor
@@ -59,11 +59,11 @@ PODS:
   - CordovaPlugins (5.5.1):
     - CapacitorCordova
     - SQLCipher (~> 4.0)
-  - IonicEnterpriseAuth (5.0.10):
+  - IonicEnterpriseAuth (5.1.1):
     - Capacitor
   - Sentry/HybridSDK (8.8.0):
     - SentryPrivate (= 8.8.0)
-  - SentryCapacitor (0.11.5):
+  - SentryCapacitor (0.14.0):
     - Capacitor
     - Sentry/HybridSDK (= 8.8.0)
   - SentryPrivate (8.8.0)
@@ -188,7 +188,7 @@ SPEC CHECKSUMS:
   CapacitorClipboard: 77edf49827ea21da2a9c05c690a4a6a4d07199c4
   CapacitorCommunityAppleSignIn: eafdd59b18b38161fa5cceee7b0e31312b122958
   CapacitorCommunityBarcodeScanner: 7feb206489c8555a8ca0c74c57ddf49ead774eb8
-  CapacitorCommunityBluetoothLe: 83b0de348b2ec461e0f9fa0e48c9e79c8378ddb0
+  CapacitorCommunityBluetoothLe: 86ca83c89199336039bad94f45f8363114ae1464
   CapacitorCommunityCameraPreview: 47070b2c66a79a424afe7c73bd951dfabfbc0f76
   CapacitorCommunityKeepAwake: f3442e3e9b666dd0162522fbd053da1fe81ede20
   CapacitorCordova: e128cc7688c070ca0bfa439898a5f609da8dbcfe
@@ -210,9 +210,9 @@ SPEC CHECKSUMS:
   CapacitorToast: bb0d79b78d9c27c0199b57f735dd50b8fc363489
   CapawesomeCapacitorFilePicker: 4a27a464c569de315738fcb7bdd3ad544ef3c7c2
   CordovaPlugins: e5fcd14ff435d0aa5c2f72bcd18f3be54a6fa221
-  IonicEnterpriseAuth: 0406599d884f119844b1e9ebc256501bcf3c6f0e
+  IonicEnterpriseAuth: 540ab5e7719554c0edd22dfaa733f210cff90ba6
   Sentry: 927dfb29d18a14d924229a59cc2ad149f43349f2
-  SentryCapacitor: 724954fbb78c214200e9f70ce0edad868e647eec
+  SentryCapacitor: 24d2fdc00e259b9cd9454a2331444ab6c41141be
   SentryPrivate: 4350d865f898224ab9fa02b37d6ee7fbb623f47e
   SQLCipher: 57fa9f863fa4a3ed9dd3c90ace52315db8c0fdca
 
