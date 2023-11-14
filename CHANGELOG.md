@@ -1,4 +1,8 @@
 # Changelog
+## 1.16
+
+- Fix for some url detection without port specified
+
 ## 1.15
 - Fix for AppFlow and ngrok
 - Autostart on detecting a new app
