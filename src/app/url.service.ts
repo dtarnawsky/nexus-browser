@@ -169,9 +169,9 @@ export class UrlService {
       if (url.includes('ngrok.io')) {
         return true;
       }
-
+      
       // Non standard ports
-      if (uri.port !== '80' && uri.port !== '443') {
+      if (uri.port !== '80' && uri.port !== '443' && uri.port) {
         return true;
       }
 
