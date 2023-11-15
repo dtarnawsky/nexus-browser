@@ -4,6 +4,7 @@ import { UrlService } from './url.service';
 import { IonActionSheet, IonApp, IonRouterOutlet } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { ellipsisHorizontal, qrCodeSharp, closeOutline, documentTextOutline } from "ionicons/icons";
+import { defineCustomElement } from '@ionic/core/components/ion-modal.js';
 
 @Component({
     standalone: true,
@@ -16,6 +17,9 @@ export class AppComponent {
     constructor(private urlService: UrlService) {
         addIcons({ ellipsisHorizontal, qrCodeSharp, closeOutline, documentTextOutline });
         this.initializeApp();
+        
+        // This is required to fix tree shaking until this issue is resolved: https://github.com/ionic-team/ionic-framework/issues/28385
+        defineCustomElement();
     }
 
     private initializeApp() {
