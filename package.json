@@ -112,5 +112,13 @@
     "tslib": "2.6.2",
     "typescript": "5.1.6"
   },
-  "description": "Browser Mobile Application"
+  "description": "Browser Mobile Application",
+  "browserslist": [
+    "Chrome >=61",
+    "ChromeAndroid >=61",
+    "Firefox >=63",
+    "Edge >=79",
+    "Safari >=13",
+    "iOS >=13"
+  ]
 }
