@@ -14,6 +14,7 @@ dependencies {
     implementation project(':capacitor-community-bluetooth-le')
     implementation project(':capacitor-community-camera-preview')
     implementation project(':capacitor-community-keep-awake')
+    implementation project(':capacitor-mlkit-barcode-scanning')
     implementation project(':capacitor-action-sheet')
     implementation project(':capacitor-app')
     implementation project(':capacitor-browser')

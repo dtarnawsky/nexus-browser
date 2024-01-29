@@ -1,7 +1,8 @@
 # Changelog
 ## 1.17
 
-- 
+- Add @capacitor-mlkit/barcode-scanning
+- Update dependencies
 
 ## 1.16
 
