@@ -1,4 +1,8 @@
 # Changelog
+## 1.17
+
+- Update dependencies
+
 ## 1.16
 
 - Fix for some url detection without port specified
