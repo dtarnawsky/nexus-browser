@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.19
+## 1.20
 
 - Update dependencies. Support for targeting Android 13
 
