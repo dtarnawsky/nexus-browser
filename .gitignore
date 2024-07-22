@@ -54,6 +54,7 @@ yarn-error.log
 
 
 # Miscellaneous
+/.nx
 /.angular
 /.angular/cache
 .sass-cache/
