@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.20
+## 1.21
 
 - Update dependencies. Support for targeting Android 13
 

@@ -8,13 +8,13 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app-routes';
 
 if (environment.production) {
-    enableProdMode();
+  enableProdMode();
 }
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        provideIonicAngular({}),
-        provideRouter(routes)
-    ],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideIonicAngular({}),
+    provideRouter(routes),
+  ],
 });

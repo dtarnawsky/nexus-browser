@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { CapacitorBarcodeScannerOptions, CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';
+import {
+  CapacitorBarcodeScannerOptions,
+  CapacitorBarcodeScanner,
+  CapacitorBarcodeScannerTypeHint,
+} from '@capacitor/barcode-scanner';
 @Injectable({
   providedIn: 'root',
 })
 export class ScanService {
-  constructor() { }
+  constructor() {}
 
-  public async prepare(): Promise<void> {
-  }
+  public async prepare(): Promise<void> {}
 
   public async scan(): Promise<string | undefined> {
     try {
