@@ -103,7 +103,7 @@ export class UrlService {
 
   private isIp(val: string): boolean {
     return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
-      val
+      val,
     );
   }
 
@@ -169,7 +169,7 @@ export class UrlService {
       if (url.includes('ngrok.io')) {
         return true;
       }
-      
+
       // Non standard ports
       if (uri.port !== '80' && uri.port !== '443' && uri.port) {
         return true;

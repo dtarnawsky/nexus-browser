@@ -13,7 +13,7 @@ export class HistoryService {
   private key = 'shortcuts';
   private maxShortcuts = 100;
   private services: Service[] = [];
-  constructor() { }
+  constructor() {}
 
   public async load(): Promise<Service[]> {
     if (this.services.length > 0) {
@@ -97,7 +97,7 @@ export class HistoryService {
         (err: any) => {
           console.error(err);
           reject(err);
-        }
+        },
       );
     });
   }
@@ -133,13 +133,13 @@ export class HistoryService {
             (err: any) => {
               console.error(err);
               reject(err);
-            }
+            },
           );
         },
         (err: any) => {
           console.error(err);
           reject(err);
-        }
+        },
       );
     });
   }
@@ -214,7 +214,7 @@ export class HistoryService {
     } catch {
       url = url.trim();
     }
-    
+
     if (url.includes('nexusbrowser.com/')) {
       // Likely a deep link like: https://nexusbrowser.com/192.168.0.125%3A8101
       const part = url.split('nexusbrowser.com/');
@@ -270,12 +270,12 @@ export class HistoryService {
   public isValidUrl(url: string): boolean {
     var urlPattern = new RegExp(
       '^(https?:\\/\\/)?' + // validate protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // validate query string
-      '(\\#[-a-z\\d_]*)?$',
-      'i'
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // validate query string
+        '(\\#[-a-z\\d_]*)?$',
+      'i',
     ); // validate fragment locator
     return !!urlPattern.test(url);
   }
