@@ -17,7 +17,7 @@ PODS:
     - Capacitor
   - CapacitorCommunityAppleSignIn (7.1.0):
     - Capacitor
-  - CapacitorCommunityBluetoothLe (8.1.3):
+  - CapacitorCommunityBluetoothLe (8.2.0):
     - Capacitor
   - CapacitorCommunityCameraPreview (8.0.1):
     - Capacitor
@@ -39,12 +39,12 @@ PODS:
     - IONGeolocationLib (= 2.1.0)
   - CapacitorHaptics (8.0.2):
     - Capacitor
-  - CapacitorInappbrowser (3.0.3):
+  - CapacitorInappbrowser (4.0.0):
     - Capacitor
     - OSInAppBrowserLib (~> 2.3.2)
   - CapacitorKeyboard (8.0.3):
     - Capacitor
-  - CapacitorLocalNotifications (8.0.2):
+  - CapacitorLocalNotifications (8.2.0):
     - Capacitor
   - CapacitorNetwork (8.0.1):
     - Capacitor
@@ -205,7 +205,7 @@ SPEC CHECKSUMS:
   CapacitorCamera: 8f6acf83664118321111e76acef86390211ccb08
   CapacitorClipboard: c75fdaa6e622111119f35e7914ecfc67b05efecb
   CapacitorCommunityAppleSignIn: 271cb2860576fd2961508bbfa7a82117d93eadca
-  CapacitorCommunityBluetoothLe: ab4b04474c7c13315cd591dee0995f1adce73c98
+  CapacitorCommunityBluetoothLe: 8c17283f1837af41fc739110daab518c694674c8
   CapacitorCommunityCameraPreview: 38b73c0135eae2c8bc7652745b3820b035737313
   CapacitorCommunityKeepAwake: d41922812644562e94a79acaf7f41e6d9413af8c
   CapacitorCordova: 9010447fe25e869705fcf525e5f490facde87608
@@ -215,9 +215,9 @@ SPEC CHECKSUMS:
   CapacitorFileViewer: 29c87294cf8741a469dfd8979d1a0187fec54b58
   CapacitorGeolocation: b36f6287bfc9f2eefa04dc900496f2c8ae666136
   CapacitorHaptics: 296f771ecd89c7a1bd92a7b6826a7d268e2e70f5
-  CapacitorInappbrowser: 77fd27ec2bbd2ea591a9a3ccfc7b27fe9eeb816c
+  CapacitorInappbrowser: 9e37b866ab024807900024c38a7d6f3eeed514b0
   CapacitorKeyboard: 31c8285d92c9d1410071d52449f16d2c6673b6f4
-  CapacitorLocalNotifications: 4db83a7f6bdd2f30dcedf5c6f92c415065467a24
+  CapacitorLocalNotifications: 2615aa008f608b95d3921a778ee1988abf1e6148
   CapacitorNetwork: 8812ce60d11fb63d8f2e4ba51a49b2e59892ebe2
   CapacitorPreferences: cca2021f386efb75947c850334447d9ff22b14f1
   CapacitorScreenOrientation: 6c3c84223ea1dd44aaa7184e2b416dd1192270d0
